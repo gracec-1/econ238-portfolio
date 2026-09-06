@@ -1,0 +1,234 @@
+/* =========================================
+   Grace Chen — ECON 238 Portfolio
+   Environmental Economics Theme
+   ========================================= */
+
+/* ---------- Overall Page ---------- */
+
+body {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(126, 180, 145, 0.18), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(102, 166, 190, 0.15), transparent 30%),
+    linear-gradient(135deg, #eef7f0 0%, #f8f6ed 50%, #edf6f7 100%);
+
+  color: #26382d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+
+/* ---------- Main Content ---------- */
+
+.wrapper {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 40px 25px;
+}
+
+
+/* ---------- Content Card ---------- */
+
+section {
+  background: rgba(255, 255, 255, 0.92);
+
+  padding: 45px 55px;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 35px rgba(45, 75, 55, 0.10),
+    0 2px 8px rgba(45, 75, 55, 0.05);
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* ---------- Headings ---------- */
+
+h1 {
+  color: #285943;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  color: #397052;
+  font-size: 1.7rem;
+
+  margin-top: 45px;
+  margin-bottom: 20px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 2px solid #d8e9dc;
+}
+
+h3 {
+  color: #4b7659;
+}
+
+
+/* ---------- Paragraphs ---------- */
+
+p {
+  margin-bottom: 1.2rem;
+}
+
+
+/* ---------- Links ---------- */
+
+a {
+  color: #327052;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #1e4b35;
+  text-decoration: underline;
+}
+
+
+/* ---------- Assignment Table ---------- */
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  margin: 25px 0;
+
+  background: white;
+
+  border: 1px solid #dce9df;
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 15px rgba(45, 75, 55, 0.06);
+}
+
+th {
+  background: #dceee1;
+  color: #285943;
+
+  font-weight: 700;
+
+  padding: 13px 15px;
+}
+
+td {
+  padding: 12px 15px;
+
+  border-top: 1px solid #e8efe9;
+}
+
+tr:nth-child(even) td {
+  background: #f8fbf8;
+}
+
+tr:hover td {
+  background: #edf7ef;
+}
+
+
+/* ---------- Blockquotes ---------- */
+
+blockquote {
+  margin: 25px 0;
+
+  padding: 15px 22px;
+
+  background: #f0f8f2;
+
+  border-left: 4px solid #72a77e;
+
+  border-radius: 0 10px 10px 0;
+
+  color: #40594a;
+}
+
+
+/* ---------- Code ---------- */
+
+code {
+  background: #edf4ee;
+  color: #315c42;
+
+  padding: 3px 6px;
+
+  border-radius: 5px;
+}
+
+
+/* ---------- Horizontal Lines ---------- */
+
+hr {
+  border: 0;
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    #cfe1d3,
+    transparent
+  );
+
+  margin: 35px 0;
+}
+
+
+/* ---------- Images ---------- */
+
+img {
+  max-width: 100%;
+  height: auto;
+
+  border-radius: 12px;
+
+  box-shadow: 0 5px 20px rgba(40, 70, 50, 0.10);
+}
+
+
+/* ---------- Lists ---------- */
+
+li {
+  margin-bottom: 7px;
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 700px) {
+
+  .wrapper {
+    padding: 20px 12px;
+  }
+
+  section {
+    padding: 30px 22px;
+    border-radius: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 9px 8px;
+  }
+}
