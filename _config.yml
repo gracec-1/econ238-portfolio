@@ -4,4 +4,4 @@ defaults:
   - scope:
       path: ""
     values:
-      css: "/assets/css/style.css"
+      css: "style.css"
