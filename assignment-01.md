@@ -30,4 +30,4 @@ The next time you see a headline about a data center using “enough water for t
 
 Ask: Compared to what? Who benefits? Who pays? And what are we giving up to make it happen?
 
-Those questions won't make the decision simple. But they can help Rochester make a decision based on the full picture rather than the scariest number in the headline.
+Those questions won't make the decision simple. But they can help us make a decision based on the full picture rather than the scariest number in the headline.
