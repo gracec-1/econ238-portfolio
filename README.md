@@ -9,7 +9,7 @@ Welcome to my public portfolio for **ECON 238: Environmental Economics**. This s
 
 | Week | Assignment                                                               | Topic                   |
 | ---- | ------------------------------------------------------------------------ | ----------------------- |
-| 1    | [Assignment 1](assignment-01.md)                                         | Op Ed                   |
+| 1    | [Assignment 1](assignment-01.md)                                         | Op Ed: Big Bad Data Centers|
 | 2    | Coming soon                                                              | —                       |
 | 3    | Coming soon                                                              | —                       |
 | 4    | Coming soon                                                              | —                       |
