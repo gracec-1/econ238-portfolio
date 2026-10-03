@@ -7,12 +7,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --ink:#16301f; --muted:#4f6657; --paper:#ffffff; --bg:#eaf5ec;
+  --ink:#16301f; --muted:#4f6657; --paper:#ffffff; --bg:#c9e9d3;
   --line:#c3dcc8; --forest:#0b3d2e; --leaf:#2e9e5b; --lime:#b9e37a; --sun:#f4c430; --sky:#3a9bd5; --earth:#9a6b3a;
   --accent:#2e9e5b; --accent-soft:#e3f4d6;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
+body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;background:#c9e9d3}
 
 /* hero */
 .hero{position:relative;overflow:hidden;color:#fff;border-bottom:6px solid var(--lime);
@@ -116,42 +116,21 @@ a{color:#0f6a4a}
 <h2>1. Start with LCOE</h2>
 <p>
 LCOE is the average cost of producing one megawatt-hour from a new power plant over its life.
-Lazard's 2026 report (Version 19.0, July 2026) gives an unsubsidized range for each technology.
-The bars below show those ranges; the diamond is the midpoint I use as a single comparison number.
-Hover over a bar to see the values.
+Lazard's 2026 report gives a range for each technology; the diamond marks the midpoint.
+Hover over a bar to see the numbers.
 </p>
-
 <div class="figure">
   <div class="chartbox short"><canvas id="lcoeChart" role="img" aria-label="Bar chart of Lazard 2026 LCOE ranges for solar, wind, and gas combined cycle"></canvas></div>
-  <p class="note">
-    Source: Lazard, Levelized Cost of Energy+ (July 2026), LCOE v19.0, unsubsidized, new-build.
-    Midpoints are Lazard's reported averages ($69, $68, $90).
-  </p>
+  <p class="note">Source: Lazard, Levelized Cost of Energy+ (July 2026), v19.0, unsubsidized, new-build.</p>
 </div>
-
-<table>
-<thead><tr><th>Technology</th><th>LCOE range ($/MWh)</th><th>Midpoint ($/MWh)</th><th>Capacity factor assumed by Lazard</th></tr></thead>
-<tbody>
-<tr><td>Utility solar PV</td><td>$40–$98</td><td>$69</td><td>30% (low case) to 20% (high case)</td></tr>
-<tr><td>Onshore wind</td><td>$37–$99</td><td>$68</td><td>55% (low case) to 30% (high case)</td></tr>
-<tr><td>Gas combined cycle</td><td>$51–$129</td><td>$90</td><td>90% (low case) to 30% (high case)</td></tr>
-</tbody>
-</table>
-<p class="note">
-Notice that each cost range depends heavily on how many hours the plant is assumed to run.
-That is already a hint that "cost per MWh" is not a fixed property of a technology.
-</p>
 </section>
 
 <!-- ============ 2 ============ -->
 <section>
-<h2>2. Now add actual hourly demand</h2>
+<h2>2. Now add real hourly demand</h2>
 <p>
-An electricity system does not need one annual number; it needs a different amount every hour.
-This exhibit uses hourly electricity demand for the AEP zone of the PJM Interconnection,
-a regional grid operator that serves parts of 13 states and Washington, D.C.
-The orange line shows the highest hour of each day; the dark green line shows the daily average.
-Move your mouse along either line to read the exact values.
+A system needs a different amount of electricity every hour. This is actual hourly demand for the AEP zone of the
+PJM grid (parts of 13 states and Washington, D.C.). Move your mouse along the lines to read the values.
 </p>
 
 <div class="controls">
@@ -163,7 +142,7 @@ Move your mouse along either line to read the exact values.
 
 <div id="loadFallback" hidden class="callout">
   <strong>The hourly data file was not found.</strong>
-  Add <code>AEP_hourly.csv</code> to a <code>data</code> folder next to this page (see the Sources section),
+  Add <code>AEP_hourly.csv</code> to a <code>data</code> folder next to this page (see Sources),
   or load it from your computer to preview the page now:
   <br><br>
   <input type="file" id="fileInput" accept=".csv,text/csv" aria-label="Load AEP_hourly.csv from your computer">
@@ -177,53 +156,40 @@ Move your mouse along either line to read the exact values.
 
 <div class="figure">
   <div class="chartbox"><canvas id="dailyChart" role="img" aria-label="Line chart of daily average and daily peak electricity demand across the selected year"></canvas></div>
-  <p class="note">
-    Source: PJM hourly load for the AEP zone (MW). Each point is one day; the model below uses all 8,760 hours.
-  </p>
+  <p class="note">Source: PJM hourly load, AEP zone (MW). Orange: highest hour of each day. Dark green: daily average.</p>
 </div>
 </section>
 
 <!-- ============ 3 ============ -->
 <section>
-<h2>3. An hourly system has another constraint</h2>
+<h2>3. The hourly constraint</h2>
 <p>
-To see the difference, I build a deliberately simple system with three resources: solar, wind, and gas.
-Solar and wind produce according to a stylized hourly availability pattern; gas fills whatever demand is left.
-If solar and wind produce more than demand, the surplus is wasted (curtailed).
+I compare two systems that serve this same demand: gas-only, and solar + wind + gas.
+In every hour, supply must be at least as large as demand, so gas fills whatever solar and wind do not cover.
 </p>
-
-<div class="callout">
-  <strong>The hourly constraint:</strong> in every hour, solar + wind + gas must be at least as large as demand.
-</div>
 
 <div class="controls">
   <label for="weekSlider">Week of the year <output id="weekOut"></output>
     <input type="range" id="weekSlider" min="1" max="52" step="1" value="27">
   </label>
-  <button type="button" id="peakWeekBtn">Jump to the week of the annual peak</button>
+  <button type="button" id="peakWeekBtn">Jump to the annual peak week</button>
 </div>
 
 <div class="figure">
   <div class="chartbox"><canvas id="weekChart" role="img" aria-label="Line chart of hourly demand, available solar and wind, and gas needed for one week"></canvas></div>
   <p class="note">
-    Hover to read all four values for any hour. The renewable profiles are stylized availability patterns
-    (solar follows daylight and season; wind varies by season and hour), scaled to the capacity factors Lazard
-    reports for PJM: 18% for solar, 30% for wind. They are not measured output from the AEP zone, and they contain no
-    multi-day weather events, which makes this model <em>more</em> favorable to renewables than reality.
-    Drag the slider to see how the gas gap changes by season. Solar and wind sizes are set in section 4.
+    Solar and wind profiles are stylized (scaled to Lazard's PJM capacity factors: 18% solar, 30% wind), not measured output.
+    Solar and wind sizes are set in section 4.
   </p>
 </div>
 </section>
 
 <!-- ============ 4 ============ -->
 <section>
-<h2>4. What happens to the system's cost?</h2>
+<h2>4. What does each system cost?</h2>
 <p>
-Now compare two systems that serve the same hourly demand: <strong>gas-only</strong>, and
-<strong>solar + wind + gas</strong>. The key difference from a plain LCOE comparison is that
-every resource is charged for what it actually requires: renewables for the capacity built,
-and gas for the capacity it must keep (to cover the hours when renewables fall short) plus the fuel it burns.
-Use the sliders to change the assumptions.
+Each system pays for what it needs: renewables for the capacity built, and gas for the capacity it must keep
+plus the fuel it burns. Move the sliders to change the assumptions.
 </p>
 
 <div class="controls">
@@ -248,123 +214,80 @@ Use the sliders to change the assumptions.
 
 <div class="figure">
   <div class="chartbox"><canvas id="systemChart" role="img" aria-label="Stacked bar chart comparing annual cost components of a gas-only system and a solar plus wind plus gas system"></canvas></div>
-  <p class="note">Hover over any block to see its cost; the footer shows the system total and cost per MWh delivered.</p>
-</div>
-
-<div class="stats four">
-  <div class="stat"><div class="label">Share of energy from wind + solar</div><div id="renShare" class="value">—</div></div>
-  <div class="stat"><div class="label">Energy wasted (curtailed)</div><div id="curtShare" class="value">—</div></div>
-  <div class="stat"><div class="label">Gas fleet utilization, gas-only</div><div id="utilGas" class="value">—</div></div>
-  <div class="stat"><div class="label">Gas fleet utilization, mixed</div><div id="utilMix" class="value">—</div></div>
+  <p class="note">Hover over any block for its cost; the footer shows the system total and cost per MWh.</p>
 </div>
 
 <p id="interpretation" class="callout">Loading the hourly model…</p>
 
 <details>
-<summary>How the costs are calculated (and where each number comes from)</summary>
-<table style="margin-top:12px">
-<thead><tr><th>Item</th><th>How it is charged</th><th>Value used</th><th>Derivation from Lazard v19.0</th></tr></thead>
-<tbody>
-<tr><td>Solar</td><td>Per kW of capacity built</td><td>$138 per kW-year</td>
-<td>LCOE × capacity factor × 8.76, averaged over the low and high cases:
-$40 × 30% × 8.76 ≈ $105 and $98 × 20% × 8.76 ≈ $172.</td></tr>
-<tr><td>Wind</td><td>Per kW of capacity built</td><td>$219 per kW-year</td>
-<td>$37 × 55% × 8.76 ≈ $178 and $99 × 30% × 8.76 ≈ $260.</td></tr>
-<tr><td>Gas capacity</td><td>Per kW of capacity kept</td><td>$236 per kW-year</td>
-<td>Capital + fixed O&amp;M from Lazard's gas combined-cycle cost breakdown:
-low case $25 + $1 = $26/MWh at 90% capacity factor ≈ $205; high case $92 + $10 = $102/MWh at 30% ≈ $268.</td></tr>
-<tr><td>Gas energy</td><td>Per MWh actually generated</td><td>6.51 × gas price + $3.88</td>
-<td>Average heat rate of 6,475 and 6,550 Btu/kWh, and average variable O&amp;M of $2.75 and $5.00/MWh.
-Lazard's own gas price assumption is $3.45/MMBtu.</td></tr>
-</tbody>
-</table>
-<p class="note">
-Capacity is sized as a percentage of the selected year's peak demand. The gas-only system keeps gas capacity equal to peak demand.
-The mixed system keeps gas capacity equal to the largest hourly gap that solar and wind leave in the modeled year.
-Both systems ignore reserve margins, transmission, storage, outages, and plant retirements.
-The conversions above are my own arithmetic on Lazard's published figures, not numbers Lazard reports directly.
-</p>
+<summary>How the costs are calculated</summary>
+<ul>
+<li><strong>Solar $138 and wind $219 per kW-year:</strong> Lazard's LCOE × capacity factor × 8.76, averaged over its low and high cases.</li>
+<li><strong>Gas capacity $236 per kW-year:</strong> capital + fixed O&amp;M from Lazard's combined-cycle cost breakdown, averaged over low and high cases.</li>
+<li><strong>Gas fuel and variable cost:</strong> 6.51 × gas price + $3.88 per MWh (Lazard's heat rate and variable O&amp;M; Lazard assumes $3.45/MMBtu).</li>
+<li><strong>Capacity:</strong> gas-only keeps gas equal to peak demand; the mixed system keeps gas equal to the largest hourly gap solar and wind leave.</li>
+</ul>
+<p class="note">These conversions are my own arithmetic on Lazard's published figures, not numbers Lazard reports directly.</p>
 </details>
 </section>
 
 <!-- ============ 5 ============ -->
 <section>
-<h2>5. A cross-check using Lazard's own firming analysis</h2>
+<h2>5. So what changed?</h2>
 <p>
-Lazard's 2026 report also includes a "Cost of Firming Intermittency" analysis, which adds the cost of the backup capacity
-a wind or solar plant needs in order to count as reliable capacity in a given grid. For PJM, the grid operator
-credits new solar with 12% and new wind with 38% of their nameplate capacity at times of peak demand
-(a measure called ELCC), and values new firm capacity at $5.50 per kW-month (Net CONE).
-Applying Lazard's published formula with those PJM numbers and capacity factors of 18% (solar) and 30% (wind) gives:
+LCOE asks: <strong>what does a megawatt-hour from this plant cost on average?</strong>
+The hourly system asks: <strong>what does it cost to have enough electricity in every hour?</strong>
+Here, wind and solar replace much of the gas <em>energy</em> but little gas <em>capacity</em>, so the remaining
+gas plants run less often and their fixed costs are spread over fewer megawatt-hours.
+Whether the mixed system is cheaper depends on assumptions such as the gas price. Try the slider.
 </p>
-
-<div class="figure">
-  <div class="chartbox short"><canvas id="firmChart" role="img" aria-label="Stacked bar chart of LCOE midpoint plus PJM firming cost for solar and wind, versus gas combined cycle"></canvas></div>
-  <p class="note" id="firmNote"></p>
-</div>
+<p>
+This does not make LCOE wrong. Lazard itself says LCOE is not a total system-cost analysis, and its own
+firming analysis for PJM adds roughly $37/MWh to solar and $16/MWh to wind.
+A low LCOE is a necessary starting point, but it does not by itself tell you the cost of a system.
+</p>
 </section>
 
 <!-- ============ 6 ============ -->
 <section>
-<h2>6. So what changed?</h2>
-<p>
-The LCOE comparison asks a technology-level question:
-<strong>what does a megawatt-hour from this plant cost on average?</strong>
-The hourly system asks a different question:
-<strong>what does it cost to have enough electricity at the exact hours it is needed?</strong>
-</p>
-<p>
-In this model, wind and solar replace a lot of gas <em>energy</em> but very little gas <em>capacity</em>,
-because the hours when they produce least still have to be covered. The gas plants that remain
-are used less often, so their fixed costs are spread over fewer megawatt-hours.
-Whether the mixed system is cheaper then depends on how expensive the avoided fuel is
-(try the gas price slider), how much firm capacity the renewables can replace, and how the load is shaped.
-</p>
-<p>
-This does not mean LCOE is useless or that renewables are a bad deal. Lazard itself states that LCOE is
-"a cost-focused benchmarking tool, and not a planning tool or total system-cost analysis," and that it does not say
-what the optimal mix of resources is. The point of this exhibit is narrower:
-a low LCOE is a necessary starting point for comparing technologies, but it does not by itself tell you the cost of a system.
-</p>
+<h2>6. Limits to keep in mind</h2>
+<div class="panel">
+<ul>
+<li><strong>Old demand, new costs:</strong> the hourly data end in 2018, while costs are Lazard's 2026 figures. This is an illustration, not a forecast.</li>
+<li><strong>Stylized renewables:</strong> no multi-day cloudy or calm spells, which makes the model more favorable to renewables than reality.</li>
+<li><strong>Not modeled:</strong> storage, transmission, reserve margins, existing plants, tax credits, and carbon prices.</li>
+</ul>
+</div>
 </section>
 
 <!-- ============ 7 ============ -->
 <section>
-<h2>7. Assumptions and limitations</h2>
+<h2>7. Sources and how this was made</h2>
 <div class="panel">
+<p>
+<strong>Costs:</strong> Lazard, <em>Levelized Cost of Energy+</em> (July 2026),
+<a href="https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf" target="_blank" rel="noopener">lazard.com (PDF)</a>;
+ranges also reported by <a href="https://www.utilitydive.com/news/renewables-remain-cheapest-lcoe-rising-lazard/825443/" target="_blank" rel="noopener">Utility Dive</a>.
+<br>
+<strong>Hourly demand:</strong> PJM Interconnection, AEP zone (2004–2018), distributed in the Kaggle dataset
+<a href="https://www.kaggle.com/datasets/robikscube/hourly-energy-consumption" target="_blank" rel="noopener">Hourly Energy Consumption</a>.
+The page loads <code>data/AEP_hourly.csv</code> from this repository, or falls back to a public
+<a href="https://github.com/BharatTupe/Energy-Demand-Forecasting" target="_blank" rel="noopener">GitHub copy</a> of the same file.
+For newer years, see the <a href="https://www.eia.gov/electricity/gridmonitor/" target="_blank" rel="noopener">EIA Hourly Electric Grid Monitor</a>.
+</p>
+<p><strong>What I asked the AI to do:</strong></p>
 <ul>
-<li><strong>Demand data end in 2018.</strong> The hourly series covers 2004–2018 and I use full calendar years only. Combining 2007–2017 demand with 2026 costs is an illustration, not a forecast; demand growth from data centers is not captured.</li>
-<li><strong>Costs:</strong> Lazard's 2026 unsubsidized, new-build figures. Federal tax credits are not included, and costs vary by project and region.</li>
-<li><strong>Renewable output:</strong> stylized and deterministic, scaled to Lazard's PJM capacity factors. Real wind and solar have cloudy and calm spells lasting days, which would raise the gas capacity needed.</li>
-<li><strong>Gas:</strong> dispatchable and always available; no outages, no fuel-supply limits.</li>
-<li><strong>Not modeled:</strong> storage, transmission, reserve margins, imports and exports, demand response, retirements of existing plants, carbon prices, and the cost of capital changing with the mix.</li>
-<li><strong>Existing plants:</strong> this is a new-build comparison. A system that already owns gas plants faces a different calculation, because existing plants have low marginal costs (Lazard reports $32–$51/MWh for existing combined-cycle plants).</li>
-<li><strong>Results are driven by assumptions.</strong> The sliders show how much; no single setting is "the answer."</li>
+<li>Find and check Lazard's 2026 LCOE ranges and cost breakdowns.</li>
+<li>Clean and sort the PJM hourly data.</li>
+<li>Build the hourly solar + wind + gas model and the cost comparison.</li>
+<li>Convert Lazard's costs into per-kW-year costs, and add sliders to test assumptions.</li>
 </ul>
-</div>
-
-<h2>8. Sources and reproducibility</h2>
-<div class="panel">
-<p>
-<strong>Cost data:</strong> Lazard, <em>Levelized Cost of Energy+</em> (July 2026), LCOE v19.0 and Cost of Firming Intermittency.
-<a href="https://www.lazard.com/media/kcfconhf/lazards-lcoeplus_vf.pdf" target="_blank" rel="noopener">lazard.com (PDF)</a>.
-The same ranges for solar, wind, and gas were independently reported by
-<a href="https://www.utilitydive.com/news/renewables-remain-cheapest-lcoe-rising-lazard/825443/" target="_blank" rel="noopener">Utility Dive</a>.
-</p>
-<p>
-<strong>Hourly demand:</strong> PJM Interconnection hourly load for the AEP zone, in MW (file <code>AEP_hourly.csv</code>, 2004-10-01 to 2018-08-03).
-PJM is the original publisher (<a href="https://www.pjm.com" target="_blank" rel="noopener">pjm.com</a>); the file is distributed in the Kaggle dataset
-<a href="https://www.kaggle.com/datasets/robikscube/hourly-energy-consumption" target="_blank" rel="noopener">Hourly Energy Consumption</a>,
-which has been used in published research papers. The page first looks for <code>data/AEP_hourly.csv</code> in this repository. If it is not there, it falls back to a public GitHub copy of the same file (<a href="https://github.com/BharatTupe/Energy-Demand-Forecasting" target="_blank" rel="noopener">BharatTupe/Energy-Demand-Forecasting</a>), which is a third-party copy of PJM data rather than PJM itself. For a fully reproducible exhibit, download the Kaggle file and save it as <code>data/AEP_hourly.csv</code> next to this page.
-For newer years, the U.S. Energy Information Administration publishes hourly demand for every U.S. grid operator through its
-<a href="https://www.eia.gov/electricity/gridmonitor/" target="_blank" rel="noopener">Hourly Electric Grid Monitor</a>.
-</p>
-<p>
-<strong>Method:</strong> I used AI as a research and analysis tool to locate sources, write the code, and test assumptions. I checked the cost figures
-against Lazard's report and Utility Dive's coverage of it. The model is mine and is described above; all of it runs in your browser from the data file, so anyone can inspect it by viewing this page's source.
+<p class="note">
+Everything runs in your browser from the data file. View the page source to inspect or extend it;
+the assumptions are listed at the top of the script.
 </p>
 </div>
-
+</section>
 
 <footer class="sitefooter">
   <div>
@@ -646,10 +569,6 @@ function renderModel() {
   $("mixPerMWh").textContent = "$" + (r.costs.total / A_).toFixed(0);
   $("gasCapacity").textContent = comma(r.maxGas) + " MW";
   $("breakeven").textContent = r.breakeven !== null ? "$" + r.breakeven.toFixed(2) : (r.alwaysLower ? "Mixed always lower" : "—");
-  $("renShare").textContent = (100 * r.delivered / A_).toFixed(0) + "%";
-  $("curtShare").textContent = (100 * r.curt / (r.solarGen + r.windGen || 1)).toFixed(1) + "% of wind + solar";
-  $("utilGas").textContent = (100 * A_ / (state.peak * r.n)).toFixed(0) + "%";
-  $("utilMix").textContent = r.maxGas > 0 ? (100 * r.gasGen / (r.maxGas * r.n)).toFixed(0) + "%" : "—";
 
   const diff = (r.costs.total / r.base.total - 1) * 100;
   let html;
@@ -664,7 +583,7 @@ function renderModel() {
     if (r.breakeven !== null) html += " The two systems cost the same at a gas price of about $" + r.breakeven.toFixed(2) + " per MMBtu.";
     if (r.alwaysLower) html += " At these settings the mixed system is cheaper at any gas price.";
   }
-  html += " This is an illustration with stylized renewable output, not a forecast and not a claim about the least-cost real-world system.";
+  html += " This is an illustration, not a forecast.";
   $("interpretation").innerHTML = html;
 
   drawSystem(r);
@@ -742,38 +661,6 @@ function drawWeek() {
   });
 }
 
-/* ---------- Section 5: firming cross-check ---------- */
-function drawFirming() {
-  const firm = (elcc, cf) => (1 - elcc) * A.netCone * 12 / (cf * 8.76);   // $/MWh
-  const fs = firm(A.elcc.solar, A.solarCF), fw = firm(A.elcc.wind, A.windCF);
-  draw("firmChart", {
-    type: "bar",
-    data: {
-      labels: ["Utility solar PV", "Onshore wind", "Gas combined cycle"],
-      datasets: [
-        { label: "LCOE midpoint (Lazard)", data: [A.lcoe.solar, A.lcoe.wind, A.lcoe.gas], backgroundColor: ["#d99a00", "#2f7fb8", "#6b7280"] },
-        { label: "PJM firming cost", data: [fs, fw, 0], backgroundColor: "#b4532a" }
-      ]
-    },
-    options: {
-      interaction: { mode: "index", intersect: false },
-      plugins: {
-        legend: { position: "bottom" },
-        tooltip: { callbacks: {
-          label: c => " " + c.dataset.label + ": $" + c.parsed.y.toFixed(0) + "/MWh",
-          footer: items => "Total: $" + items.reduce((s, i) => s + i.parsed.y, 0).toFixed(0) + "/MWh"
-        } }
-      },
-      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: "$ per MWh" } } }
-    }
-  });
-  $("firmNote").textContent =
-    "Firming cost = nameplate × (1 − ELCC) × Net CONE × 12 months ÷ annual energy: solar (1 − 0.12) × $5.50 × 12 ÷ (0.18 × 8.76) ≈ $" + fs.toFixed(0) +
-    "/MWh; wind (1 − 0.38) × $5.50 × 12 ÷ (0.30 × 8.76) ≈ $" + fw.toFixed(0) + "/MWh. These match the PJM firming costs shown in Lazard's report. " +
-    "The LCOE bars use Lazard's national midpoints for simplicity; Lazard's own regional figures use PJM capacity factors. " +
-    "Lazard does not compute a firming cost for gas, although PJM also credits gas combined cycle at only 78% of capacity, so a fully symmetric comparison would add something to the gas bar too.";
-}
-
 /* ---------- Events ---------- */
 $("year").addEventListener("change", selectYear);
 ["solarCap", "windCap", "gasPrice"].forEach(id => $(id).addEventListener("input", renderModel));
@@ -792,7 +679,5 @@ $("fileInput").addEventListener("change", e => {
 
 $("solarOut").textContent = ""; $("windOut").textContent = ""; $("gasOut").textContent = "";
 drawLCOE();
-drawFirming();
 loadData();
 </script>
-
