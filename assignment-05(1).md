@@ -7,78 +7,108 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --ink:#1d2733; --muted:#5b6673; --paper:#ffffff; --bg:#f1f4f7;
-  --line:#d5dbe2; --accent:#1b5e7a; --accent-soft:#e8f1f5;
-  --solar:#d99a00; --wind:#2f7fb8; --gas:#6b7280; --demand:#1b3a4b; --peak:#b4532a;
+  --ink:#10213a; --muted:#51607a; --paper:#ffffff; --bg:#e9f1ff;
+  --line:#c5d6f2; --navy:#0a2540; --blue:#1565d8; --amber:#ffb703; --teal:#00a896; --coral:#f25f5c;
+  --accent:#1565d8; --accent-soft:#e3eeff;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.6}
-main{max-width:1000px;margin:auto;padding:40px 22px 70px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;border-bottom:6px solid var(--amber);
+  background:linear-gradient(135deg,#0a2540 0%,#0f4aa8 55%,#1565d8 100%)}
+.hero::after{content:"";position:absolute;right:-90px;top:-110px;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,183,3,.95) 0%,rgba(255,183,3,.35) 40%,rgba(255,183,3,0) 70%)}
+.hero-inner{position:relative;z-index:1;max-width:1000px;margin:auto;padding:60px 22px 52px}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}
-h1{font-size:44px;margin:0 0 14px;letter-spacing:-.01em}
-h2{font-size:28px;margin:56px 0 14px}
+.hero h1{font-size:50px;margin:0 0 16px;letter-spacing:-.01em;color:#fff;max-width:14em}
+.subtitle{font-size:20px;color:#d6e6ff;max-width:60ch;margin:0}
+
+main{max-width:1000px;margin:auto;padding:36px 22px 50px}
+h2{font-size:28px;margin:56px 0 14px;color:var(--navy);border-left:8px solid var(--amber);padding-left:14px}
 h3{font-size:19px;margin:0 0 8px}
 p{max-width:75ch}
-.subtitle{font-size:20px;color:var(--muted);max-width:60ch;margin:0}
-header{padding:8px 0 26px;border-bottom:3px solid var(--ink)}
-.question{font-size:20px;background:var(--paper);border-left:6px solid var(--accent);padding:18px 22px;margin:28px 0;max-width:none}
-.figure,.panel{background:var(--paper);border:1px solid var(--line);padding:22px;margin:20px 0}
+
+.question{font-size:21px;background:var(--amber);color:var(--ink);padding:20px 26px;margin:0 0 8px;max-width:none;
+  box-shadow:6px 6px 0 var(--navy)}
+
+.figure,.panel{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--blue);padding:22px;margin:20px 0;
+  box-shadow:0 8px 22px rgba(10,37,64,.09)}
 .chartbox{position:relative;height:380px}
 .chartbox.short{height:320px}
 .note{font-size:14px;color:var(--muted);margin:12px 0 0}
-.callout{background:var(--accent-soft);border:1px solid #c9dde5;padding:16px 20px;margin:20px 0;max-width:none}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:18px 0;border:1px solid var(--line);background:var(--paper)}
+
+.callout{background:#fff3cf;border:1px solid #f1d27c;border-left:6px solid var(--amber);padding:16px 20px;margin:20px 0;max-width:none}
+#interpretation{background:#dcebff;border-color:#a9c8f5;border-left-color:var(--blue)}
+
+/* stat blocks, color coded */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
 .stats.four{grid-template-columns:repeat(4,1fr)}
-.stat{padding:16px 18px;border-right:1px solid var(--line)}
-.stat:last-child{border-right:0}
+.stat{padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--blue);box-shadow:0 6px 16px rgba(10,37,64,.07)}
+.stat:nth-child(1){border-top-color:var(--amber)}
+.stat:nth-child(2){border-top-color:var(--blue)}
+.stat:nth-child(3){border-top-color:var(--teal)}
+.stat:nth-child(4){border-top-color:var(--coral)}
 .stat .label{font-size:13px;color:var(--muted)}
-.stat .value{font-family:Georgia,serif;font-size:26px;font-weight:700;margin-top:2px}
-.controls{display:flex;gap:18px 28px;align-items:end;flex-wrap:wrap;margin:6px 0 16px}
+.stat .value{font-family:Georgia,serif;font-size:26px;font-weight:700;margin-top:2px;color:var(--navy)}
+
+/* controls */
+.controls{display:flex;gap:18px 28px;align-items:end;flex-wrap:wrap;margin:10px 0 16px;background:var(--paper);border:1px solid var(--line);padding:16px 18px}
 .controls label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;min-width:200px}
 .controls output{font-weight:400;color:var(--muted)}
-input[type=range]{width:100%;accent-color:var(--accent)}
-select,button,input[type=file]{font:inherit;padding:7px 12px}
-button{background:var(--paper);border:1px solid var(--ink);cursor:pointer}
-button:hover{background:var(--ink);color:#fff}
-:focus-visible{outline:3px solid #f0a500;outline-offset:2px}
-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:15px}
-th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
-th{background:#eaeef2}
+input[type=range]{width:100%;accent-color:var(--blue)}
+select,button,input[type=file]{font:inherit;padding:8px 14px}
+select{border:1px solid var(--blue);background:#fff}
+button{background:var(--blue);color:#fff;border:0;cursor:pointer;font-weight:600}
+button:hover{background:var(--navy)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:15px;box-shadow:0 6px 16px rgba(10,37,64,.07)}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+tbody tr:nth-child(even){background:#f3f8ff}
+
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .two>div{background:var(--paper);border:1px solid var(--line);padding:20px}
-details{background:var(--paper);border:1px solid var(--line);padding:14px 20px;margin:16px 0}
-summary{cursor:pointer;font-weight:600}
+details{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--teal);padding:14px 20px;margin:16px 0}
+summary{cursor:pointer;font-weight:700;color:var(--navy)}
 .status{font-size:14px;color:var(--muted)}
 .status.err{color:#9b1c1c;font-weight:600}
-code{background:#eaeef2;padding:1px 5px;font-size:.92em}
+code{background:#e3eeff;padding:1px 5px;font-size:.92em}
 ul{max-width:80ch}
 li{margin:5px 0}
-footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-a{color:#164e63}
+a{color:#0f4aa8}
+
+/* footer band */
+.sitefooter{background:var(--navy);color:#b9cdee;border-top:6px solid var(--amber);margin-top:30px;padding:30px 22px;font-size:14px}
+.sitefooter div{max-width:1000px;margin:auto}
+
 @media(max-width:760px){
   .stats,.stats.four,.two{grid-template-columns:1fr}
-  .stat{border-right:0;border-bottom:1px solid var(--line)}
-  h1{font-size:34px}
+  .hero h1{font-size:36px}
+  .hero::after{width:240px;height:240px}
 }
 </style>
 </head>
- 
+
 <body>
-<main>
- 
-<header>
-  <h1>LCOE Versus an Electricity System</h1>
-  <p class="subtitle">
-    What changes when we stop comparing the average cost of electricity technologies
-    and start building a system that must meet real demand every hour?
-  </p>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>LCOE Versus an Electricity System</h1>
+    <p class="subtitle">
+      What changes when we stop comparing the average cost of electricity technologies
+      and start building a system that must meet real demand every hour?
+    </p>
+  </div>
 </header>
- 
+
+<main>
 <p class="question">
   <strong>The question:</strong> Does a low Levelized Cost of Electricity (LCOE)
   automatically mean a low-cost electricity system?
 </p>
- 
+
 <!-- ============ 1 ============ -->
 <section>
 <h2>1. Start with LCOE</h2>
@@ -88,7 +118,7 @@ Lazard's 2026 report (Version 19.0, July 2026) gives an unsubsidized range for e
 The bars below show those ranges; the diamond is the midpoint I use as a single comparison number.
 Hover over a bar to see the values.
 </p>
- 
+
 <div class="figure">
   <div class="chartbox short"><canvas id="lcoeChart" role="img" aria-label="Bar chart of Lazard 2026 LCOE ranges for solar, wind, and gas combined cycle"></canvas></div>
   <p class="note">
@@ -96,7 +126,7 @@ Hover over a bar to see the values.
     Midpoints are Lazard's reported averages ($69, $68, $90).
   </p>
 </div>
- 
+
 <table>
 <thead><tr><th>Technology</th><th>LCOE range ($/MWh)</th><th>Midpoint ($/MWh)</th><th>Capacity factor assumed by Lazard</th></tr></thead>
 <tbody>
@@ -110,7 +140,7 @@ Notice that each cost range depends heavily on how many hours the plant is assum
 That is already a hint that "cost per MWh" is not a fixed property of a technology.
 </p>
 </section>
- 
+
 <!-- ============ 2 ============ -->
 <section>
 <h2>2. Now add actual hourly demand</h2>
@@ -121,14 +151,14 @@ a regional grid operator that serves parts of 13 states and Washington, D.C.
 The orange line shows the highest hour of each day; the blue line shows the daily average.
 Move your mouse along either line to read the exact values.
 </p>
- 
+
 <div class="controls">
   <label for="year">Year shown
     <select id="year" disabled><option>Loading…</option></select>
   </label>
   <span id="loadStatus" class="status">Loading hourly data…</span>
 </div>
- 
+
 <div id="loadFallback" hidden class="callout">
   <strong>The hourly data file was not found.</strong>
   Add <code>AEP_hourly.csv</code> to a <code>data</code> folder next to this page (see the Sources section),
@@ -136,13 +166,13 @@ Move your mouse along either line to read the exact values.
   <br><br>
   <input type="file" id="fileInput" accept=".csv,text/csv" aria-label="Load AEP_hourly.csv from your computer">
 </div>
- 
+
 <div class="stats">
   <div class="stat"><div class="label">Annual electricity demand</div><div id="annualMWh" class="value">—</div></div>
   <div class="stat"><div class="label">Average hourly demand</div><div id="avgMW" class="value">—</div></div>
   <div class="stat"><div class="label">Peak hourly demand</div><div id="peakMW" class="value">—</div></div>
 </div>
- 
+
 <div class="figure">
   <div class="chartbox"><canvas id="dailyChart" role="img" aria-label="Line chart of daily average and daily peak electricity demand across the selected year"></canvas></div>
   <p class="note">
@@ -150,7 +180,7 @@ Move your mouse along either line to read the exact values.
   </p>
 </div>
 </section>
- 
+
 <!-- ============ 3 ============ -->
 <section>
 <h2>3. An hourly system has another constraint</h2>
@@ -159,18 +189,18 @@ To see the difference, I build a deliberately simple system with three resources
 Solar and wind produce according to a stylized hourly availability pattern; gas fills whatever demand is left.
 If solar and wind produce more than demand, the surplus is wasted (curtailed).
 </p>
- 
+
 <div class="callout">
   <strong>The hourly constraint:</strong> in every hour, solar + wind + gas must be at least as large as demand.
 </div>
- 
+
 <div class="controls">
   <label for="weekSlider">Week of the year <output id="weekOut"></output>
     <input type="range" id="weekSlider" min="1" max="52" step="1" value="27">
   </label>
   <button type="button" id="peakWeekBtn">Jump to the week of the annual peak</button>
 </div>
- 
+
 <div class="figure">
   <div class="chartbox"><canvas id="weekChart" role="img" aria-label="Line chart of hourly demand, available solar and wind, and gas needed for one week"></canvas></div>
   <p class="note">
@@ -182,7 +212,7 @@ If solar and wind produce more than demand, the surplus is wasted (curtailed).
   </p>
 </div>
 </section>
- 
+
 <!-- ============ 4 ============ -->
 <section>
 <h2>4. What happens to the system's cost?</h2>
@@ -193,7 +223,7 @@ every resource is charged for what it actually requires: renewables for the capa
 and gas for the capacity it must keep (to cover the hours when renewables fall short) plus the fuel it burns.
 Use the sliders to change the assumptions.
 </p>
- 
+
 <div class="controls">
   <label for="solarCap">Solar capacity <output id="solarOut"></output>
     <input type="range" id="solarCap" min="0" max="150" step="5" value="50">
@@ -206,28 +236,28 @@ Use the sliders to change the assumptions.
   </label>
   <button type="button" id="resetBtn">Reset to defaults</button>
 </div>
- 
+
 <div class="stats four">
   <div class="stat"><div class="label">Gas-only cost per MWh</div><div id="gasPerMWh" class="value">—</div></div>
   <div class="stat"><div class="label">Mixed-system cost per MWh</div><div id="mixPerMWh" class="value">—</div></div>
   <div class="stat"><div class="label">Gas capacity still needed</div><div id="gasCapacity" class="value">—</div></div>
   <div class="stat"><div class="label">Gas price where costs are equal</div><div id="breakeven" class="value">—</div></div>
 </div>
- 
+
 <div class="figure">
   <div class="chartbox"><canvas id="systemChart" role="img" aria-label="Stacked bar chart comparing annual cost components of a gas-only system and a solar plus wind plus gas system"></canvas></div>
   <p class="note">Hover over any block to see its cost; the footer shows the system total and cost per MWh delivered.</p>
 </div>
- 
+
 <div class="stats four">
   <div class="stat"><div class="label">Share of energy from wind + solar</div><div id="renShare" class="value">—</div></div>
   <div class="stat"><div class="label">Energy wasted (curtailed)</div><div id="curtShare" class="value">—</div></div>
   <div class="stat"><div class="label">Gas fleet utilization, gas-only</div><div id="utilGas" class="value">—</div></div>
   <div class="stat"><div class="label">Gas fleet utilization, mixed</div><div id="utilMix" class="value">—</div></div>
 </div>
- 
+
 <p id="interpretation" class="callout">Loading the hourly model…</p>
- 
+
 <details>
 <summary>How the costs are calculated (and where each number comes from)</summary>
 <table style="margin-top:12px">
@@ -254,7 +284,7 @@ The conversions above are my own arithmetic on Lazard's published figures, not n
 </p>
 </details>
 </section>
- 
+
 <!-- ============ 5 ============ -->
 <section>
 <h2>5. A cross-check using Lazard's own firming analysis</h2>
@@ -265,13 +295,13 @@ credits new solar with 12% and new wind with 38% of their nameplate capacity at 
 (a measure called ELCC), and values new firm capacity at $5.50 per kW-month (Net CONE).
 Applying Lazard's published formula with those PJM numbers and capacity factors of 18% (solar) and 30% (wind) gives:
 </p>
- 
+
 <div class="figure">
   <div class="chartbox short"><canvas id="firmChart" role="img" aria-label="Stacked bar chart of LCOE midpoint plus PJM firming cost for solar and wind, versus gas combined cycle"></canvas></div>
   <p class="note" id="firmNote"></p>
 </div>
 </section>
- 
+
 <!-- ============ 6 ============ -->
 <section>
 <h2>6. So what changed?</h2>
@@ -295,7 +325,7 @@ what the optimal mix of resources is. The point of this exhibit is narrower:
 a low LCOE is a necessary starting point for comparing technologies, but it does not by itself tell you the cost of a system.
 </p>
 </section>
- 
+
 <!-- ============ 7 ============ -->
 <section>
 <h2>7. Assumptions and limitations</h2>
@@ -310,7 +340,7 @@ a low LCOE is a necessary starting point for comparing technologies, but it does
 <li><strong>Results are driven by assumptions.</strong> The sliders show how much; no single setting is "the answer."</li>
 </ul>
 </div>
- 
+
 <h2>8. Sources and reproducibility</h2>
 <div class="panel">
 <p>
@@ -332,14 +362,16 @@ For newer years, the U.S. Energy Information Administration publishes hourly dem
 against Lazard's report and Utility Dive's coverage of it. The model is mine and is described above; all of it runs in your browser from the data file, so anyone can inspect it by viewing this page's source.
 </p>
 </div>
- 
-<footer>
-  ECON 238 — Environmental Economics · University of Rochester · Fall 2026<br>
-  SHOW ME Project — LCOE Versus an Electricity System
-</footer>
- 
+
 </main>
- 
+
+<footer class="sitefooter">
+  <div>
+    ECON 238 — Environmental Economics · University of Rochester · Fall 2026<br>
+    SHOW ME Project — LCOE Versus an Electricity System
+  </div>
+</footer>
+
 <script>
 /* ---------- Assumptions (all sourced from Lazard LCOE+ v19.0, July 2026) ---------- */
 const A = {
@@ -354,19 +386,19 @@ const A = {
 const DEFAULTS = { solar: 50, wind: 50, gas: 3.45 };
 const DATA_URL = "data/AEP_hourly.csv";
 const MIRROR_URL = "https://raw.githubusercontent.com/BharatTupe/Energy-Demand-Forecasting/main/AEP_hourly.csv";
- 
+
 const $ = id => document.getElementById(id);
 const state = { rows: [], year: null, yr: [], solarAv: [], windAv: [], peak: 0, annual: 0, res: null };
 const charts = {};
- 
+
 const comma = x => Math.round(x).toLocaleString("en-US");
 const mean = a => a.reduce((s, v) => s + v, 0) / (a.length || 1);
 const usd = x => "$" + x.toFixed(0);
- 
+
 /* ---------- Chart helpers ---------- */
 Chart.defaults.font.family = "system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif";
 Chart.defaults.color = "#3b4552";
- 
+
 const crosshair = {
   id: "crosshair",
   afterDatasetsDraw(chart) {
@@ -377,7 +409,7 @@ const crosshair = {
     c.lineWidth = 1; c.strokeStyle = "rgba(29,39,51,.45)"; c.setLineDash([4, 3]); c.stroke(); c.restore();
   }
 };
- 
+
 function draw(canvasId, cfg) {
   if (charts[canvasId]) charts[canvasId].destroy();
   cfg.options = cfg.options || {};
@@ -386,12 +418,12 @@ function draw(canvasId, cfg) {
   cfg.options.maintainAspectRatio = false;
   charts[canvasId] = new Chart($(canvasId), cfg);
 }
- 
+
 function lineDataset(label, data, color, width) {
   return { label, data, borderColor: color, backgroundColor: color, borderWidth: width || 2,
            pointRadius: 0, pointHoverRadius: 5, pointHitRadius: 12, tension: 0.15 };
 }
- 
+
 /* ---------- Section 1: LCOE chart ---------- */
 function drawLCOE() {
   const labels = ["Utility solar PV", "Onshore wind", "Gas combined cycle"];
@@ -421,7 +453,7 @@ function drawLCOE() {
     }
   });
 }
- 
+
 /* ---------- Data loading ---------- */
 function parseCSV(text) {
   const lines = text.split(/\r?\n/), out = [], seen = new Set();
@@ -440,7 +472,7 @@ function parseCSV(text) {
   out.sort((a, b) => a.t - b.t);         // the source file is not guaranteed to be in time order
   return out;
 }
- 
+
 async function loadData() {
   const sources = [
     [DATA_URL, "data/AEP_hourly.csv in this repository"],
@@ -459,7 +491,7 @@ async function loadData() {
   $("loadFallback").hidden = false;
   $("interpretation").textContent = "The hourly model will run as soon as the data file is loaded.";
 }
- 
+
 function init(rows, sourceName) {
   if (rows.length < 20000) {
     $("loadStatus").textContent = "That file does not look like hourly data (" + rows.length + " valid rows). Expected columns: Datetime, AEP_MW.";
@@ -482,7 +514,7 @@ function init(rows, sourceName) {
   $("loadFallback").hidden = true;
   selectYear();
 }
- 
+
 /* ---------- Stylized availability profiles ---------- */
 function solarShape(doy, h) {
   if (h < 6 || h > 18) return 0;
@@ -495,7 +527,7 @@ function windShape(doy, h) {
   const hourly = 0.07 * Math.sin(2 * Math.PI * (h + 3) / 24);
   return Math.max(0.08, Math.min(0.55, season + hourly));
 }
- 
+
 function selectYear() {
   state.year = Number($("year").value);
   const yr = state.rows.filter(r => r.y === state.year);
@@ -507,23 +539,23 @@ function selectYear() {
   state.windAv = wRaw.map(v => Math.min(1, v * wScale));
   state.peak = Math.max(...yr.map(r => r.mw));
   state.annual = yr.reduce((s, r) => s + r.mw, 0);
- 
+
   $("annualMWh").textContent = (state.annual / 1e6).toFixed(1) + " million MWh";
   $("avgMW").textContent = comma(state.annual / yr.length) + " MW";
   $("peakMW").textContent = comma(state.peak) + " MW";
- 
+
   const peakRow = yr.find(r => r.mw === state.peak);
   $("weekSlider").value = Math.min(52, Math.floor(peakRow.dayIdx / 7) + 1);
   state.peakWeek = Number($("weekSlider").value);
- 
+
   drawDaily();
   renderModel();
 }
- 
+
 /* ---------- Section 2: daily chart ---------- */
 const dateLabel = (year, dayIdx) =>
   new Date(Date.UTC(year, 0, 1 + dayIdx)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
- 
+
 function drawDaily() {
   const sum = [], max = [], cnt = [];
   state.yr.forEach(r => {
@@ -556,7 +588,7 @@ function drawDaily() {
     }
   });
 }
- 
+
 /* ---------- Section 3 & 4: model ---------- */
 function runModel() {
   const sc = Number($("solarCap").value) / 100, wc = Number($("windCap").value) / 100;
@@ -566,7 +598,7 @@ function runModel() {
   const n = state.yr.length;
   const sArr = new Array(n), wArr = new Array(n), gArr = new Array(n);
   let solarGen = 0, windGen = 0, gasGen = 0, curt = 0, delivered = 0, maxGas = 0;
- 
+
   for (let i = 0; i < n; i++) {
     const mw = state.yr[i].mw;
     const s = sCap * state.solarAv[i], w = wCap * state.windAv[i], ren = s + w;
@@ -576,7 +608,7 @@ function runModel() {
     curt += Math.max(0, ren - mw); delivered += Math.min(ren, mw);
     if (gas > maxGas) maxGas = gas;
   }
- 
+
   const costs = {
     solar: sCap * A.solarKwYr * 1000,
     wind: wCap * A.windKwYr * 1000,
@@ -586,7 +618,7 @@ function runModel() {
   costs.total = costs.solar + costs.wind + costs.gasCap + costs.gasEnergy;
   const base = { gasCap: state.peak * A.gasFixedKwYr * 1000, gasEnergy: state.annual * gasVar };
   base.total = base.gasCap + base.gasEnergy;
- 
+
   // Gas price at which both systems cost the same.
   const dE = state.annual - gasGen;
   let breakeven = null, alwaysLower = false;
@@ -598,16 +630,16 @@ function runModel() {
   }
   return { sc, wc, price, sCap, wCap, gasVar, n, sArr, wArr, gArr, solarGen, windGen, gasGen, curt, delivered, maxGas, costs, base, breakeven, alwaysLower };
 }
- 
+
 function renderModel() {
   if (!state.yr.length) return;
   const r = runModel();
   state.res = r;
- 
+
   $("solarOut").textContent = Math.round(r.sc * 100) + "% of peak (" + comma(r.sCap) + " MW)";
   $("windOut").textContent = Math.round(r.wc * 100) + "% of peak (" + comma(r.wCap) + " MW)";
   $("gasOut").textContent = "$" + r.price.toFixed(2) + " per MMBtu";
- 
+
   const A_ = state.annual;
   $("gasPerMWh").textContent = "$" + (r.base.total / A_).toFixed(0);
   $("mixPerMWh").textContent = "$" + (r.costs.total / A_).toFixed(0);
@@ -617,7 +649,7 @@ function renderModel() {
   $("curtShare").textContent = (100 * r.curt / (r.solarGen + r.windGen || 1)).toFixed(1) + "% of wind + solar";
   $("utilGas").textContent = (100 * A_ / (state.peak * r.n)).toFixed(0) + "%";
   $("utilMix").textContent = r.maxGas > 0 ? (100 * r.gasGen / (r.maxGas * r.n)).toFixed(0) + "%" : "—";
- 
+
   const diff = (r.costs.total / r.base.total - 1) * 100;
   let html;
   if (r.sc === 0 && r.wc === 0) {
@@ -633,11 +665,11 @@ function renderModel() {
   }
   html += " This is an illustration with stylized renewable output, not a forecast and not a claim about the least-cost real-world system.";
   $("interpretation").innerHTML = html;
- 
+
   drawSystem(r);
   drawWeek();
 }
- 
+
 function drawSystem(r) {
   const B = 1e9;
   draw("systemChart", {
@@ -670,7 +702,7 @@ function drawSystem(r) {
     }
   });
 }
- 
+
 function drawWeek() {
   if (!state.res) return;
   const r = state.res, week = Number($("weekSlider").value);
@@ -685,7 +717,7 @@ function drawWeek() {
   }
   const end = Math.min(d1 - 1, 364);
   $("weekOut").textContent = "week " + week + " (" + dateLabel(state.year, d0) + " – " + dateLabel(state.year, end) + ")";
- 
+
   draw("weekChart", {
     type: "line",
     plugins: [crosshair],
@@ -708,7 +740,7 @@ function drawWeek() {
     }
   });
 }
- 
+
 /* ---------- Section 5: firming cross-check ---------- */
 function drawFirming() {
   const firm = (elcc, cf) => (1 - elcc) * A.netCone * 12 / (cf * 8.76);   // $/MWh
@@ -740,7 +772,7 @@ function drawFirming() {
     "The LCOE bars use Lazard's national midpoints for simplicity; Lazard's own regional figures use PJM capacity factors. " +
     "Lazard does not compute a firming cost for gas, although PJM also credits gas combined cycle at only 78% of capacity, so a fully symmetric comparison would add something to the gas bar too.";
 }
- 
+
 /* ---------- Events ---------- */
 $("year").addEventListener("change", selectYear);
 ["solarCap", "windCap", "gasPrice"].forEach(id => $(id).addEventListener("input", renderModel));
@@ -756,12 +788,12 @@ $("fileInput").addEventListener("change", e => {
   rd.onload = () => init(parseCSV(String(rd.result)), f.name + " (loaded from your computer)");
   rd.readAsText(f);
 });
- 
+
 $("solarOut").textContent = ""; $("windOut").textContent = ""; $("gasOut").textContent = "";
 drawLCOE();
 drawFirming();
 loadData();
 </script>
- 
+
 </body>
 </html>
