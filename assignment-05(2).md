@@ -12,9 +12,7 @@
   --accent:#2e9e5b; --accent-soft:#e3f4d6;
 }
 *{box-sizing:border-box}
-body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;
-  background-color:#c9e9d3;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%232e9e5b' fill-opacity='.13'%3E%3Cellipse cx='32' cy='32' rx='16' ry='6.5' transform='rotate(-35 32 32)'/%3E%3Cellipse cx='112' cy='78' rx='16' ry='6.5' transform='rotate(40 112 78)'/%3E%3Cellipse cx='60' cy='124' rx='13' ry='5.5' transform='rotate(-10 60 124)'/%3E%3Cellipse cx='140' cy='24' rx='11' ry='4.5' transform='rotate(60 140 24)'/%3E%3Ccircle cx='86' cy='30' r='3'/%3E%3Ccircle cx='20' cy='96' r='2.5'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(180deg,#bfe7cf 0%,#d6f0c4 38%,#c3e6dd 70%,#b9def0 100%)}
+body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;background:#c9e9d3}
 
 /* hero */
 .hero{position:relative;overflow:hidden;color:#fff;border-bottom:6px solid var(--lime);
