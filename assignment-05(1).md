@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -365,7 +365,6 @@ against Lazard's report and Utility Dive's coverage of it. The model is mine and
 </p>
 </div>
 
-</main>
 
 <footer class="sitefooter">
   <div>
@@ -797,5 +796,3 @@ drawFirming();
 loadData();
 </script>
 
-</body>
-</html>
