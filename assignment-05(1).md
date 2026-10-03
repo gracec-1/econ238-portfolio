@@ -7,81 +7,83 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --ink:#10213a; --muted:#51607a; --paper:#ffffff; --bg:#e9f1ff;
-  --line:#c5d6f2; --navy:#0a2540; --blue:#1565d8; --amber:#ffb703; --teal:#00a896; --coral:#f25f5c;
-  --accent:#1565d8; --accent-soft:#e3eeff;
+  --ink:#16301f; --muted:#4f6657; --paper:#ffffff; --bg:#eaf5ec;
+  --line:#c3dcc8; --forest:#0b3d2e; --leaf:#2e9e5b; --lime:#b9e37a; --sun:#f4c430; --sky:#3a9bd5; --earth:#9a6b3a;
+  --accent:#2e9e5b; --accent-soft:#e3f4d6;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.6}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
 
 /* hero */
-.hero{position:relative;overflow:hidden;color:#fff;border-bottom:6px solid var(--amber);
-  background:linear-gradient(135deg,#0a2540 0%,#0f4aa8 55%,#1565d8 100%)}
+.hero{position:relative;overflow:hidden;color:#fff;border-bottom:6px solid var(--lime);
+  background:linear-gradient(160deg,#0b3d2e 0%,#17704a 55%,#2e9e5b 100%)}
 .hero::after{content:"";position:absolute;right:-90px;top:-110px;width:380px;height:380px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,183,3,.95) 0%,rgba(255,183,3,.35) 40%,rgba(255,183,3,0) 70%)}
-.hero-inner{position:relative;z-index:1;max-width:1000px;margin:auto;padding:60px 22px 52px}
+  background:radial-gradient(circle,rgba(244,196,48,.95) 0%,rgba(244,196,48,.35) 42%,rgba(244,196,48,0) 70%)}
+.hero::before{content:"";position:absolute;left:-10%;right:-10%;bottom:-78px;height:130px;background:#0b3d2e;opacity:.5;
+  border-radius:50% 50% 0 0 / 100% 100% 0 0}
+.hero-inner{position:relative;z-index:1;max-width:900px;margin:auto;padding:60px 22px 56px}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}
 .hero h1{font-size:50px;margin:0 0 16px;letter-spacing:-.01em;color:#fff;max-width:14em}
-.subtitle{font-size:20px;color:#d6e6ff;max-width:60ch;margin:0}
+.subtitle{font-size:20px;color:#dff3e4;max-width:none;margin:0}
 
-main{max-width:1000px;margin:auto;padding:36px 22px 50px}
-h2{font-size:28px;margin:56px 0 14px;color:var(--navy);border-left:8px solid var(--amber);padding-left:14px}
+/* one centered column for everything */
+main{max-width:900px;margin:auto;padding:36px 22px 50px}
+h2{font-size:28px;margin:56px 0 14px;color:var(--forest);border-left:8px solid var(--leaf);padding-left:14px}
 h3{font-size:19px;margin:0 0 8px}
-p{max-width:75ch}
+p,ul,.note{max-width:none}
 
-.question{font-size:21px;background:var(--amber);color:var(--ink);padding:20px 26px;margin:0 0 8px;max-width:none;
-  box-shadow:6px 6px 0 var(--navy)}
+.question{font-size:21px;background:var(--lime);color:var(--forest);padding:20px 26px;margin:0 0 8px;
+  box-shadow:6px 6px 0 var(--forest)}
 
-.figure,.panel{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--blue);padding:22px;margin:20px 0;
-  box-shadow:0 8px 22px rgba(10,37,64,.09)}
+.figure,.panel{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--leaf);padding:22px;margin:20px 0;
+  box-shadow:0 8px 22px rgba(11,61,46,.09)}
 .chartbox{position:relative;height:380px}
 .chartbox.short{height:320px}
 .note{font-size:14px;color:var(--muted);margin:12px 0 0}
 
-.callout{background:#fff3cf;border:1px solid #f1d27c;border-left:6px solid var(--amber);padding:16px 20px;margin:20px 0;max-width:none}
-#interpretation{background:#dcebff;border-color:#a9c8f5;border-left-color:var(--blue)}
+.callout{background:var(--accent-soft);border:1px solid #bfe0a3;border-left:6px solid var(--leaf);padding:16px 20px;margin:20px 0}
+#interpretation{background:#dff0fa;border-color:#abd5ec;border-left-color:var(--sky)}
 
 /* stat blocks, color coded */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
 .stats.four{grid-template-columns:repeat(4,1fr)}
-.stat{padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--blue);box-shadow:0 6px 16px rgba(10,37,64,.07)}
-.stat:nth-child(1){border-top-color:var(--amber)}
-.stat:nth-child(2){border-top-color:var(--blue)}
-.stat:nth-child(3){border-top-color:var(--teal)}
-.stat:nth-child(4){border-top-color:var(--coral)}
+.stat{padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--leaf);box-shadow:0 6px 16px rgba(11,61,46,.07)}
+.stat:nth-child(1){border-top-color:var(--sun)}
+.stat:nth-child(2){border-top-color:var(--sky)}
+.stat:nth-child(3){border-top-color:var(--leaf)}
+.stat:nth-child(4){border-top-color:var(--earth)}
 .stat .label{font-size:13px;color:var(--muted)}
-.stat .value{font-family:Georgia,serif;font-size:26px;font-weight:700;margin-top:2px;color:var(--navy)}
+.stat .value{font-family:Georgia,serif;font-size:26px;font-weight:700;margin-top:2px;color:var(--forest)}
 
 /* controls */
 .controls{display:flex;gap:18px 28px;align-items:end;flex-wrap:wrap;margin:10px 0 16px;background:var(--paper);border:1px solid var(--line);padding:16px 18px}
 .controls label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;min-width:200px}
 .controls output{font-weight:400;color:var(--muted)}
-input[type=range]{width:100%;accent-color:var(--blue)}
+input[type=range]{width:100%;accent-color:var(--leaf)}
 select,button,input[type=file]{font:inherit;padding:8px 14px}
-select{border:1px solid var(--blue);background:#fff}
-button{background:var(--blue);color:#fff;border:0;cursor:pointer;font-weight:600}
-button:hover{background:var(--navy)}
-:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+select{border:1px solid var(--leaf);background:#fff}
+button{background:var(--leaf);color:#fff;border:0;cursor:pointer;font-weight:600}
+button:hover{background:var(--forest)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 
-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:15px;box-shadow:0 6px 16px rgba(10,37,64,.07)}
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:15px;box-shadow:0 6px 16px rgba(11,61,46,.07)}
 th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
-th{background:var(--navy);color:#fff}
-tbody tr:nth-child(even){background:#f3f8ff}
+th{background:var(--forest);color:#fff}
+tbody tr:nth-child(even){background:#f2faf3}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .two>div{background:var(--paper);border:1px solid var(--line);padding:20px}
-details{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--teal);padding:14px 20px;margin:16px 0}
-summary{cursor:pointer;font-weight:700;color:var(--navy)}
+details{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--sky);padding:14px 20px;margin:16px 0}
+summary{cursor:pointer;font-weight:700;color:var(--forest)}
 .status{font-size:14px;color:var(--muted)}
 .status.err{color:#9b1c1c;font-weight:600}
-code{background:#e3eeff;padding:1px 5px;font-size:.92em}
-ul{max-width:80ch}
+code{background:#e3f4d6;padding:1px 5px;font-size:.92em}
 li{margin:5px 0}
-a{color:#0f4aa8}
+a{color:#0f6a4a}
 
 /* footer band */
-.sitefooter{background:var(--navy);color:#b9cdee;border-top:6px solid var(--amber);margin-top:30px;padding:30px 22px;font-size:14px}
-.sitefooter div{max-width:1000px;margin:auto}
+.sitefooter{background:var(--forest);color:#bfe3c8;border-top:6px solid var(--lime);margin-top:30px;padding:30px 22px;font-size:14px}
+.sitefooter div{max-width:900px;margin:auto}
 
 @media(max-width:760px){
   .stats,.stats.four,.two{grid-template-columns:1fr}
@@ -148,7 +150,7 @@ That is already a hint that "cost per MWh" is not a fixed property of a technolo
 An electricity system does not need one annual number; it needs a different amount every hour.
 This exhibit uses hourly electricity demand for the AEP zone of the PJM Interconnection,
 a regional grid operator that serves parts of 13 states and Washington, D.C.
-The orange line shows the highest hour of each day; the blue line shows the daily average.
+The orange line shows the highest hour of each day; the dark green line shows the daily average.
 Move your mouse along either line to read the exact values.
 </p>
 
@@ -573,7 +575,7 @@ function drawDaily() {
     plugins: [crosshair],
     data: { labels, datasets: [
       lineDataset("Daily peak hour", peak, "#b4532a", 1.5),
-      lineDataset("Daily average", avg, "#1b3a4b", 2.5)
+      lineDataset("Daily average", avg, "#0b3d2e", 2.5)
     ] },
     options: {
       interaction: { mode: "index", intersect: false },
@@ -722,7 +724,7 @@ function drawWeek() {
     type: "line",
     plugins: [crosshair],
     data: { labels, datasets: [
-      lineDataset("Actual demand", dem, "#1b3a4b", 3),
+      lineDataset("Actual demand", dem, "#0b3d2e", 3),
       lineDataset("Solar available", sol, "#d99a00", 2),
       lineDataset("Wind available", win, "#2f7fb8", 2),
       lineDataset("Gas needed after wind + solar", gas, "#6b7280", 2)
