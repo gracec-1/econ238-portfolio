@@ -5,7 +5,7 @@ Environmental Economics, Fall 2026, University of Rochester
 - [Assignment 2:](assignment-02.md)
 - [Assignment 3: ](assignment-03.md)
 - [Assignment 4: Extreme Weather in Context](assignment-04.md)
-- [Assignment 5: ](index.html)
+- [Assignment 5: ](assignment-05(1))
 - [Assignment 6: ](assignment-06.md)
 - [Assignment 7: ](assignment-07.md)
 - [Assignment 8: ](assignment-08.md)
