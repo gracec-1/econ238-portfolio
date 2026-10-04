@@ -170,7 +170,7 @@
 
   <section class="hero">
 
-```
+
 <div class="hero-icon">⚡</div>
 
 <h1>LCOE Versus an Electricity System</h1>
@@ -179,7 +179,6 @@
   Comparing the cost of individual technologies with the cost of
   actually meeting electricity demand every hour.
 </p>
-```
 
   </section>
 
@@ -187,14 +186,14 @@
 
   <section class="question">
 
-```
+
 <h2>The question</h2>
 
 <p>
   Does the technology with the lowest Levelized Cost of Electricity
   also produce the lowest-cost electricity system?
 </p>
-```
+
 
   </section>
 
@@ -202,7 +201,7 @@
 
   <section class="section">
 
-```
+
 <h2>First: compare technologies by LCOE</h2>
 
 <p>
@@ -218,7 +217,7 @@
   needs electricity even when the sun is not shining or wind production
   is low.
 </p>
-```
+
 
   </section>
 
@@ -226,7 +225,7 @@
 
   <section class="section">
 
-```
+
 <h2>Now require demand to be met every hour</h2>
 
 <p>
@@ -243,7 +242,7 @@
   NYISO hourly system load for October 2, 2026. Solar generation is
   illustrative and gas generation represents the remaining demand.
 </p>
-```
+
 
   </section>
 
@@ -251,7 +250,7 @@
 
   <section class="section">
 
-```
+
 <h2>What changes?</h2>
 
 <p>
@@ -266,7 +265,7 @@
   are not captured by simply comparing the LCOE of individual power
   plants.
 </p>
-```
+
 
   </section>
 
@@ -274,7 +273,7 @@
 
   <section class="takeaway">
 
-```
+
 <h2>What does this show?</h2>
 
 <p>
@@ -289,7 +288,7 @@
   hour. Once that requirement is added, the cost and mix of technologies
   can look very different.
 </p>
-```
+
 
   </section>
 
@@ -297,7 +296,7 @@
 
   <section class="section sources">
 
-```
+
 <h2>Sources</h2>
 
 <p>
@@ -325,7 +324,7 @@
     NYISO — Market Information
   </a>
 </p>
-```
+
 
   </section>
 
