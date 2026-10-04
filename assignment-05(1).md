@@ -1,10 +1,11 @@
 
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LCOE vs. the Electricity System</title>
+  <title>LCOE Versus an Electricity System</title>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -16,7 +17,6 @@
       --cream: #f5f1e8;
       --white: #fffdf8;
       --orange: #d58a3c;
-      --yellow: #e3b64b;
       --blue: #6b94a8;
       --gray: #59625d;
       --dark-gray: #29352f;
@@ -39,8 +39,6 @@
       margin: auto;
       padding: 25px;
     }
-
-    /* HERO */
 
     .hero {
       background: var(--dark-green);
@@ -69,8 +67,6 @@
       color: #e3ece7;
     }
 
-    /* QUESTION */
-
     .question {
       background: var(--light-green);
       border-left: 6px solid var(--green);
@@ -83,8 +79,6 @@
       margin-top: 0;
       color: var(--dark-green);
     }
-
-    /* SECTIONS */
 
     .section {
       background: var(--white);
@@ -103,11 +97,9 @@
       color: var(--gray);
     }
 
-    /* CHART */
-
     .chart-container {
       position: relative;
-      height: 430px;
+      height: 400px;
       margin-top: 25px;
     }
 
@@ -117,7 +109,16 @@
       margin-top: 12px;
     }
 
-    /* TAKEAWAY */
+    .calculation {
+      background: #eef3ef;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 20px;
+    }
+
+    .calculation strong {
+      color: var(--dark-green);
+    }
 
     .takeaway {
       background: #f3e7d4;
@@ -131,8 +132,6 @@
       margin-top: 0;
       color: #70461f;
     }
-
-    /* SOURCES */
 
     .sources {
       font-size: 14px;
@@ -172,6 +171,7 @@
       }
     }
   </style>
+
 </head>
 
 <body>
@@ -182,263 +182,30 @@
 
   <section class="hero">
 
-    <div class="hero-icon">⚡</div>
+```
+<div class="hero-icon">⚡</div>
 
-    <h1>LCOE vs. the Electricity System</h1>
+<h1>LCOE Versus an Electricity System</h1>
 
-    <p>
-      A power plant can have a low average cost of electricity,
-      but that does not necessarily mean the entire electricity system is cheap.
-    </p>
+<p>
+  A technology may have a low cost per megawatt-hour,
+  but a power system must still produce enough electricity
+  to meet demand every hour.
+</p>
+```
 
   </section>
-
 
   <!-- QUESTION -->
 
   <section class="question">
 
-    <h2>The question</h2>
-
-    <p>
-      Does a low Levelized Cost of Electricity (LCOE) automatically mean
-      a low-cost electricity system?
-    </p>
-
-  </section>
-
-
-  <!-- CHART -->
-
-  <section class="section">
-
-    <h2>Comparing the cost of electricity</h2>
-
-    <p>
-      LCOE estimates the average cost of producing electricity from a new
-      power plant over its lifetime. It is useful for comparing technologies,
-      but it does not include every cost involved in keeping electricity
-      available when people need it.
-    </p>
-
-    <div class="chart-container">
-      <canvas id="lcoeChart"></canvas>
-    </div>
-
-    <p class="chart-note">
-      Hover over each bar to see the estimated LCOE range.
-      Values shown are unsubsidized new-build estimates from Lazard's 2026 report.
-    </p>
-
-  </section>
-
-
-  <!-- EXPLANATION -->
-
-  <section class="section">
-
-    <h2>Why isn't LCOE the whole story?</h2>
-
-    <p>
-      Electricity demand changes from hour to hour. Solar power produces
-      electricity mainly during daylight, and wind output changes with weather.
-      A grid therefore needs enough capacity and flexibility to meet demand
-      even when renewable generation is low.
-    </p>
-
-    <p>
-      For example, adding solar and wind can reduce the amount of fuel a gas
-      plant uses, while the gas plant may still need to remain available for
-      hours when renewable generation is insufficient.
-    </p>
-
-  </section>
-
-
-  <!-- TAKEAWAY -->
-
-  <section class="takeaway">
-
-    <h2>What does this show?</h2>
-
-    <p>
-      LCOE is a useful starting point, but it answers a narrower question:
-      <strong>how much does this technology cost to produce electricity?</strong>
-    </p>
-
-    <p>
-      A complete electricity system also has to consider timing, reliability,
-      backup capacity, transmission, storage, and other system costs.
-      Therefore, the technology with the lowest LCOE is not automatically
-      the technology that produces the lowest-cost electricity system.
-    </p>
-
-  </section>
-
-
-  <!-- SOURCES -->
-
-  <section class="section sources">
-
-    <h2>Sources</h2>
-
-    <p>
-      Lazard,
-      <em>Levelized Cost of Energy+</em>, Version 19.0, July 2026.
-    </p>
-
-    <p>
-      <a
-        href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/"
-        target="_blank">
-        Lazard — Levelized Cost of Energy+
-      </a>
-    </p>
-
-    <p>
-      LCOE values are presented as ranges because the cost of a technology
-      depends on assumptions such as financing, location, and operating costs.
-    </p>
-
-  </section>
-
-
-  <footer>
-    ECON 238 • Environmental Economics • Grace Chen • Fall 2026
-  </footer>
-
-</div>
-
-
-<script>
-
-  /*
-    Lazard 2026 LCOE ranges.
-    Values are approximate midpoint/range values used
-    to create a simple visual comparison.
-  */
-
-  const technologies = [
-    "Solar PV",
-    "Wind",
-    "Gas Combined Cycle"
-  ];
-
-  const low = [
-    38,
-    37,
-    48
-  ];
-
-  const high = [
-    78,
-    86,
-    109
-  ];
-
-  const midpoint = [
-    (38 + 78) / 2,
-    (37 + 86) / 2,
-    (48 + 109) / 2
-  ];
-
-
-  const ctx = document.getElementById("lcoeChart");
-
-
-  new Chart(ctx, {
-
-    type: "bar",
-
-    data: {
-
-      labels: technologies,
-
-      datasets: [
-
-        {
-          label: "Low end",
-          data: low,
-
-          backgroundColor: "#6b94a8",
-
-          borderRadius: 5
-        },
-
-        {
-          label: "High end",
-          data: high,
-
-          backgroundColor: "#315c4a",
-
-          borderRadius: 5
-        }
-
-      ]
-
-    },
-
-
-    options: {
-
-      responsive: true,
-
-      maintainAspectRatio: false,
-
-      plugins: {
-
-        legend: {
-          position: "bottom"
-        },
-
-        tooltip: {
-
-          callbacks: {
-
-            label: function(context) {
-
-              return context.dataset.label
-                + ": $" + context.raw
-                + "/MWh";
-
-            }
-
-          }
-
-        }
-
-      },
-
-
-      scales: {
-
-        y: {
-
-          beginAtZero: true,
-
-          title: {
-            display: true,
-            text: "LCOE ($/MWh)"
-          }
-
-        },
-
-        x: {
-
-          title: {
-            display: true,
-            text: "Electricity technology"
-          }
-
-        }
-
-      }
-
-    }
-
-  });
-
-</script>
-
-</body>
-</html>
+```
+<h2>The question</h2>
+
+<p>
+  What happens when we move from simply comparing LCOE
+  to actually requiring a power system to meet electricity
+  demand every hour?
+</p>
+```
