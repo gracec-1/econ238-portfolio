@@ -6,19 +6,19 @@
 
   <title>Where Does Our Recycling Go?</title>
 
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
-      --green: #2f6b4f;
-      --dark-green: #214936;
-      --light-green: #dfeee4;
+      --green: #356b50;
+      --dark-green: #214735;
+      --light-green: #dfece2;
       --paper: #f5f1e8;
       --white: #fffdf8;
-      --orange: #d8893d;
-      --yellow: #e6b84c;
-      --gray: #59615b;
+      --orange: #d98a3d;
+      --yellow: #e5b94d;
+      --gray: #59635c;
+      --dark-gray: #303a34;
     }
 
     * {
@@ -27,9 +27,9 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
       background: var(--paper);
-      color: #26332b;
+      color: var(--dark-gray);
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
 
@@ -40,18 +40,19 @@
     }
 
     /* HERO */
+
     .hero {
       background: var(--dark-green);
       color: white;
+      text-align: center;
       padding: 55px 35px;
       border-radius: 18px;
-      text-align: center;
       margin-bottom: 25px;
     }
 
-    .hero .icon {
-      font-size: 42px;
-      margin-bottom: 10px;
+    .hero-icon {
+      font-size: 45px;
+      margin-bottom: 8px;
     }
 
     .hero h1 {
@@ -61,27 +62,29 @@
     }
 
     .hero p {
+      max-width: 680px;
       margin: 15px auto 0;
-      max-width: 650px;
       font-size: 18px;
-      color: #e5eee8;
+      color: #e4eee7;
     }
 
     /* QUESTION */
+
     .question {
       background: var(--light-green);
       border-left: 6px solid var(--green);
-      padding: 20px 25px;
       border-radius: 10px;
+      padding: 20px 25px;
       margin-bottom: 25px;
     }
 
     .question h2 {
-      margin-top: 0;
       color: var(--dark-green);
+      margin-top: 0;
     }
 
     /* SECTIONS */
+
     .section {
       background: var(--white);
       padding: 28px;
@@ -100,32 +103,36 @@
     }
 
     /* CHART */
+
     .chart-container {
       position: relative;
       height: 430px;
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     .chart-note {
       font-size: 14px;
-      color: #69736d;
-      margin-top: 10px;
+      color: #747b76;
+      margin-top: 12px;
     }
 
     /* TAKEAWAY */
+
     .takeaway {
-      background: #f3e8d6;
+      background: #f3e7d4;
       border-left: 6px solid var(--orange);
-      padding: 20px 25px;
       border-radius: 10px;
+      padding: 22px 25px;
+      margin-bottom: 25px;
     }
 
     .takeaway h2 {
+      color: #70461f;
       margin-top: 0;
-      color: #70451f;
     }
 
     /* SOURCES */
+
     .sources {
       font-size: 14px;
     }
@@ -138,10 +145,11 @@
       text-align: center;
       color: #777;
       font-size: 13px;
-      padding: 10px 0 30px;
+      padding: 5px 0 30px;
     }
 
     @media (max-width: 650px) {
+
       .page {
         padding: 15px;
       }
@@ -167,179 +175,232 @@
 
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="icon">♻️</div>
-      <h1>Where Does Our Recycling Go?</h1>
-      <p>
-        Recycling feels simple: put something in the blue bin and it gets recycled.
-        But what happens after it leaves your home?
-      </p>
-    </section>
+  <!-- HERO -->
 
-    <!-- QUESTION -->
-    <section class="question">
-      <h2>The question</h2>
-      <p>
-        How much of the material we throw away actually gets recycled?
-      </p>
-    </section>
+  <section class="hero">
 
-    <!-- CHART -->
-    <section class="section">
-      <h2>Recycling is only one part of the waste stream</h2>
+    <div class="hero-icon">♻️</div>
 
-      <p>
-        In the United States, most municipal solid waste is still managed through
-        disposal rather than recycling. This chart shows how the different
-        management methods compare.
-      </p>
+    <h1>Where Does Our Recycling Go?</h1>
 
-      <div class="chart-container">
-        <canvas id="wasteChart"></canvas>
-      </div>
+    <p>
+      Recycling is often presented as a simple solution to waste.
+      But looking at the entire waste stream tells a more complicated story.
+    </p>
 
-      <p class="chart-note">
-        Hover over a bar to see the amount represented by each category.
-      </p>
-    </section>
+  </section>
 
-    <!-- INTERPRETATION -->
-    <section class="section">
-      <h2>What does this show?</h2>
 
-      <p>
-        Recycling is an important part of waste management, but it represents only
-        one portion of the material we throw away. A large amount of waste is still
-        sent to landfills or managed in other ways.
-      </p>
+  <!-- QUESTION -->
 
-      <p>
-        This means that putting something in a recycling bin does not automatically
-        mean that it becomes a new product. Collection, sorting, contamination,
-        markets for recycled materials, and local recycling systems all affect what
-        happens next.
-      </p>
-    </section>
+  <section class="question">
 
-    <!-- TAKEAWAY -->
-    <section class="takeaway">
-      <h2>The bigger idea</h2>
+    <h2>The question</h2>
 
-      <p>
-        Recycling can help reduce waste, but it is only one part of the larger
-        waste system. Looking at the entire waste stream gives a better picture
-        than thinking about recycling by itself.
-      </p>
-    </section>
+    <p>
+      If recycling is supposed to keep materials out of landfills,
+      how large is recycling compared with the rest of the U.S. waste stream?
+    </p>
 
-    <!-- SOURCES -->
-    <section class="section sources">
-      <h2>Sources</h2>
+  </section>
 
-      <p>
-        U.S. Environmental Protection Agency,
-        <a href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling"
-           target="_blank">
-          Facts and Figures about Materials, Wastes and Recycling
-        </a>
-      </p>
 
-      <p>
-        Data and categories are based on U.S. EPA municipal solid waste
-        reporting. Values are rounded for easier interpretation.
-      </p>
-    </section>
+  <!-- CHART -->
 
-    <footer>
-      ECON 238 • Environmental Economics • Grace Chen • Fall 2026
-    </footer>
+  <section class="section">
 
-  </div>
+    <h2>What happens to municipal solid waste?</h2>
 
-  <script>
-    /*
-      Approximate values based on the EPA's municipal solid waste
-      management categories. Values are rounded for presentation.
-    */
+    <p>
+      The chart shows how municipal solid waste in the United States is
+      managed after it is generated. Recycling and composting recover some
+      materials, while a much larger share is disposed of or managed through
+      other methods.
+    </p>
 
-    const labels = [
-      "Landfilled",
-      "Recycled",
-      "Composted",
-      "Combustion"
-    ];
+    <div class="chart-container">
+      <canvas id="wasteChart"></canvas>
+    </div>
 
-    const values = [
-      146,
-      69,
-      25,
-      14
-    ];
+    <p class="chart-note">
+      Hover over each section to see its estimated share of the waste stream.
+    </p>
 
-    const ctx = document.getElementById("wasteChart");
+  </section>
 
-    new Chart(ctx, {
-      type: "bar",
 
-      data: {
-        labels: labels,
+  <!-- EXPLANATION -->
 
-        datasets: [{
-          label: "Million tons",
-          data: values,
+  <section class="section">
 
-          backgroundColor: [
-            "#718078",
-            "#2f6b4f",
-            "#d8893d",
-            "#e6b84c"
-          ],
+    <h2>Why does the difference matter?</h2>
 
-          borderRadius: 7
-        }]
-      },
+    <p>
+      It is easy to think about recycling as the final destination of an item:
+      once something enters a recycling bin, we may assume it becomes a new
+      product. In reality, recycling is one stage within a much larger waste
+      management system.
+    </p>
 
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
+    <p>
+      Materials have to be collected, sorted, processed, and sold into markets
+      before they can replace newly produced materials. Contamination and the
+      availability of markets can also affect whether collected material is
+      ultimately recovered.
+    </p>
 
-        plugins: {
-          legend: {
-            display: false
-          },
+    <p>
+      This means that the environmental value of recycling depends not only on
+      how much material people put in recycling bins, but also on what happens
+      to that material afterward.
+    </p>
 
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.raw + " million tons";
-              }
-            }
-          }
+  </section>
+
+
+  <!-- INTERPRETATION -->
+
+  <section class="takeaway">
+
+    <h2>What should we take from this?</h2>
+
+    <p>
+      Recycling is useful, but it does not eliminate the waste problem by itself.
+      The chart puts recycling into context: most of the material entering the
+      municipal waste system is still handled through other pathways.
+    </p>
+
+    <p>
+      From an environmental economics perspective, this raises a broader
+      question: <strong>Is it more effective to focus on recycling, or to reduce
+      the amount of waste created in the first place?</strong>
+    </p>
+
+  </section>
+
+
+  <!-- SOURCES -->
+
+  <section class="section sources">
+
+    <h2>Sources</h2>
+
+    <p>
+      U.S. Environmental Protection Agency (EPA),
+      <a
+        href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling"
+        target="_blank">
+        Facts and Figures about Materials, Wastes and Recycling
+      </a>
+    </p>
+
+    <p>
+      U.S. Environmental Protection Agency,
+      Sustainable Materials Management program.
+    </p>
+
+    <p>
+      Chart values are rounded for presentation. See the EPA source for the
+      underlying waste-generation and management data.
+    </p>
+
+  </section>
+
+
+  <footer>
+    ECON 238 • Environmental Economics • Grace Chen • Fall 2026
+  </footer>
+
+</div>
+
+
+<script>
+
+  /*
+    Approximate U.S. municipal solid waste management shares.
+    These values are simplified for visualization.
+  */
+
+  const labels = [
+    "Landfilled",
+    "Recycled",
+    "Composted",
+    "Combusted / Other"
+  ];
+
+  const values = [
+    57,
+    24,
+    9,
+    10
+  ];
+
+
+  const ctx = document.getElementById("wasteChart");
+
+
+  new Chart(ctx, {
+
+    type: "doughnut",
+
+    data: {
+
+      labels: labels,
+
+      datasets: [{
+
+        data: values,
+
+        backgroundColor: [
+          "#718078",
+          "#356b50",
+          "#d98a3d",
+          "#e5b94d"
+        ],
+
+        borderColor: "#fffdf8",
+        borderWidth: 3
+      }]
+
+    },
+
+
+    options: {
+
+      responsive: true,
+
+      maintainAspectRatio: false,
+
+      plugins: {
+
+        legend: {
+          position: "bottom"
         },
 
-        scales: {
-          y: {
-            beginAtZero: true,
+        tooltip: {
 
-            title: {
-              display: true,
-              text: "Million tons"
-            }
-          },
+          callbacks: {
 
-          x: {
-            title: {
-              display: true,
-              text: "Waste management method"
+            label: function(context) {
+
+              return context.label + ": "
+                + context.raw + "%";
+
             }
+
           }
+
         }
+
       }
-    });
-  </script>
+
+    }
+
+  });
+
+</script>
 
 </body>
 </html>
