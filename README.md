@@ -6,7 +6,7 @@ Environmental Economics, Fall 2026, University of Rochester
 - [Assignment 3: ](assignment-03.md)
 - [Assignment 4: Extreme Weather in Context](assignment-04.md)
 - [Assignment 5: LCOE Versus an Electricity System](assignment-05(1))
-- [Assignment 5: ](assignment-05(2))
+- [Assignment 5: Recycling in Context](assignment-05(2))
 - [Assignment 6: ](assignment-06.md)
 - [Assignment 7: ](assignment-07.md)
 - [Assignment 8: ](assignment-08.md)
