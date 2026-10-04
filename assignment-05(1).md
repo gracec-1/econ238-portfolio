@@ -414,7 +414,6 @@
     77.46
   ];
 
-
   new Chart(document.getElementById("lcoeChart"), {
 
     type: "bar",
@@ -491,7 +490,6 @@
 
   });
 
-
   /*
     ---------------------------------------------------------
     CHART 2: HOURLY ELECTRICITY SYSTEM
@@ -511,7 +509,6 @@
     ---------------------------------------------------------
   */
 
-
   const hours = [
     "12 AM", "1 AM", "2 AM", "3 AM",
     "4 AM", "5 AM", "6 AM", "7 AM",
@@ -520,7 +517,6 @@
     "4 PM", "5 PM", "6 PM", "7 PM",
     "8 PM", "9 PM", "10 PM", "11 PM"
   ];
-
 
   /*
     Actual NYISO load values in MW.
@@ -553,7 +549,6 @@
     15459
   ];
 
-
   /*
     Scale actual demand to a 100 MW peak.
   */
@@ -565,7 +560,6 @@
     return (value / peak) * 100;
 
   });
-
 
   /*
     Simplified solar production profile.
@@ -600,7 +594,6 @@
     0
   ];
 
-
   /*
     Solar cannot exceed demand in this simplified system.
   */
@@ -611,7 +604,6 @@
 
   });
 
-
   /*
     Gas fills whatever demand remains.
   */
@@ -621,7 +613,6 @@
     return value - solarGeneration[i];
 
   });
-
 
   new Chart(document.getElementById("systemChart"), {
 
