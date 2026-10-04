@@ -17,7 +17,6 @@
       --cream: #f5f1e8;
       --white: #fffdf8;
       --orange: #d58a3c;
-      --blue: #6b94a8;
       --gray: #59625d;
       --dark-gray: #29352f;
     }
@@ -99,7 +98,7 @@
 
     .chart-container {
       position: relative;
-      height: 400px;
+      height: 430px;
       margin-top: 25px;
     }
 
@@ -107,17 +106,6 @@
       font-size: 14px;
       color: #747b76;
       margin-top: 12px;
-    }
-
-    .calculation {
-      background: #eef3ef;
-      border-radius: 10px;
-      padding: 18px 22px;
-      margin-top: 20px;
-    }
-
-    .calculation strong {
-      color: var(--dark-green);
     }
 
     .takeaway {
@@ -188,9 +176,9 @@
 <h1>LCOE Versus an Electricity System</h1>
 
 <p>
-  A technology may have a low cost per megawatt-hour,
-  but a power system must still produce enough electricity
-  to meet demand every hour.
+  A technology may look inexpensive when measured by LCOE,
+  but building a system that meets electricity demand every hour
+  can require something different.
 </p>
 ```
 
@@ -204,110 +192,77 @@
 <h2>The question</h2>
 
 <p>
-  What happens when we move from simply comparing LCOE
-  to actually requiring a power system to meet electricity
-  demand every hour?
+  What happens when we move from comparing the cost of individual
+  technologies to actually building an electricity system?
 </p>
 ```
 
   </section>
 
-  <!-- PART 1 -->
+  <!-- LCOE -->
 
   <section class="section">
 
 ```
-<h2>1. Start with LCOE</h2>
+<h2>First: compare technologies by LCOE</h2>
 
 <p>
-  Levelized Cost of Electricity (LCOE) estimates the average
-  cost of building and operating a new generator over its
-  lifetime. It gives us a useful way to begin comparing
-  technologies.
+  The U.S. Energy Information Administration estimates that new
+  solar PV has a lower average LCOE than natural gas combined-cycle
+  generation, making solar appear cheaper when technologies are
+  compared on their own.
+</p>
+
+<p>
+  But LCOE does not ask whether a technology can supply electricity
+  whenever consumers need it.
+</p>
+```
+
+  </section>
+
+  <!-- HOURLY LOAD -->
+
+  <section class="section">
+
+```
+<h2>Now add real electricity demand</h2>
+
+<p>
+  Electricity demand changes throughout the day. The graph below shows
+  an actual 24-hour NYISO system load profile. A power system must
+  generate enough electricity to meet this changing demand in every hour.
 </p>
 
 <div class="chart-container">
-  <canvas id="lcoeChart"></canvas>
+  <canvas id="loadChart"></canvas>
 </div>
 
 <p class="chart-note">
-  EIA AEO2026 estimates for new resources entering service in
-  2031. Values are U.S. average LCOE in 2025 dollars per MWh.
+  NYISO system load for October 2, 2026. Values are shown in GW.
 </p>
 ```
 
   </section>
 
-  <!-- PART 2 -->
+  <!-- SYSTEM -->
 
   <section class="section">
 
 ```
-<h2>2. Now require demand to be met every hour</h2>
+<h2>What changes when every hour must be met?</h2>
 
 <p>
-  A low LCOE does not mean that a generator can produce electricity
-  whenever it is needed. To see this difference, consider one day
-  of hourly electricity demand from the New York Independent System
-  Operator (NYISO).
-</p>
-
-<p>
-  For the demonstration, the NYISO load is scaled so that the
-  day's maximum demand equals 100 MW. This keeps the system small
-  while preserving the actual shape of the hourly demand curve.
-</p>
-
-<div class="chart-container">
-  <canvas id="systemChart"></canvas>
-</div>
-
-<p class="chart-note">
-  Demand is based on NYISO hourly system load data for October 2,
-  2026 and scaled to a 100-MW peak. The solar curve is a simplified
-  daytime production profile used to demonstrate the system constraint.
-</p>
-```
-
-  </section>
-
-  <!-- PART 3 -->
-
-  <section class="section">
-
-```
-<h2>3. What changes?</h2>
-
-<p>
-  Solar and wind can have relatively low LCOEs, but their output
-  depends on weather and time of day. In the example above, solar
-  produces little or no electricity during the nighttime hours.
+  Suppose we build a system using solar because it has a low LCOE.
+  Solar can produce large amounts of electricity during daylight,
+  but its output falls to zero at night.
 </p>
 
 <p>
-  The remaining electricity demand therefore has to be supplied
-  by another resource. Here, natural gas is used as a simple
-  dispatchable backup.
+  The system therefore needs another source of electricity, storage,
+  or additional generation capacity to meet demand when solar output
+  is low.
 </p>
-
-<div class="calculation">
-
-  <p>
-    <strong>Example system:</strong>
-  </p>
-
-  <p>
-    100 MW maximum demand + 100 MW solar capacity
-    + approximately 100 MW of dispatchable backup capacity.
-  </p>
-
-  <p>
-    Even though solar has a lower LCOE than natural gas,
-    the system still needs another source capable of producing
-    electricity when solar output is low.
-  </p>
-
-</div>
 ```
 
   </section>
@@ -317,27 +272,19 @@
   <section class="takeaway">
 
 ```
-<h2>The main idea</h2>
+<h2>The takeaway</h2>
 
 <p>
   <strong>
-    LCOE compares generators. An electricity system has to meet demand over time.
+    The cheapest technology is not necessarily the cheapest complete system.
   </strong>
 </p>
 
 <p>
-  Looking only at LCOE makes solar and wind appear attractive because
-  their average generation costs can be lower than some dispatchable
-  technologies. But once every hour of demand must be satisfied,
-  the system also needs resources that can provide electricity when
-  renewable output is unavailable.
-</p>
-
-<p>
-  This does not mean that low-LCOE renewable generation is unnecessary.
-  It means that the cost of an electricity system depends on the
-  combination of technologies needed to provide electricity at the
-  right time, not just the cost of producing one additional MWh.
+  LCOE is useful for comparing individual technologies, but an electricity
+  system must also satisfy demand every hour. Once reliability and timing
+  are included, the cost of the system can look very different from the
+  LCOE of a single technology.
 </p>
 ```
 
@@ -351,36 +298,29 @@
 <h2>Sources</h2>
 
 <p>
-  <strong>U.S. Energy Information Administration (EIA)</strong><br>
-  <em>Levelized Costs of New Generation Resources in the
-  Annual Energy Outlook 2026.</em>
+  U.S. Energy Information Administration,
+  <em>Levelized Costs of New Generation Resources</em>.
 </p>
 
 <p>
   <a
     href="https://www.eia.gov/outlooks/aeo/electricity_generation/pdf/LCOE_report.pdf"
     target="_blank">
-    EIA — AEO2026 LCOE Report
+    EIA — Levelized Cost of Electricity Report
   </a>
 </p>
 
 <p>
-  <strong>New York Independent System Operator (NYISO)</strong><br>
-  Real-Time Actual Load data.
+  New York Independent System Operator (NYISO),
+  <em>Day-Ahead Forecast / System Load</em>.
 </p>
 
 <p>
   <a
-    href="https://mis.nyiso.com/public/P-58Blist.htm"
+    href="https://mis.nyiso.com/public/"
     target="_blank">
-    NYISO — Real-Time Actual Load Data
+    NYISO — Market Information
   </a>
-</p>
-
-<p>
-  EIA notes that LCOE does not capture all factors that contribute
-  to electricity investment decisions, including factors related
-  to system reliability and the value of a resource to the grid.
 </p>
 ```
 
@@ -395,118 +335,8 @@
 <script>
 
   /*
-    ---------------------------------------------------------
-    CHART 1: LCOE COMPARISON
-    Source: U.S. EIA AEO2026
-    Values are $/MWh for resources entering service in 2031.
-    ---------------------------------------------------------
-  */
-
-  const technologies = [
-    "Solar PV",
-    "Onshore Wind",
-    "Natural Gas Combined-Cycle"
-  ];
-
-  const lcoeValues = [
-    58.33,
-    56.75,
-    77.46
-  ];
-
-  new Chart(document.getElementById("lcoeChart"), {
-
-    type: "bar",
-
-    data: {
-
-      labels: technologies,
-
-      datasets: [{
-
-        label: "LCOE",
-
-        data: lcoeValues,
-
-        backgroundColor: [
-          "#d58a3c",
-          "#315c4a",
-          "#6b94a8"
-        ],
-
-        borderRadius: 6
-
-      }]
-
-    },
-
-    options: {
-
-      responsive: true,
-
-      maintainAspectRatio: false,
-
-      plugins: {
-
-        legend: {
-          display: false
-        },
-
-        tooltip: {
-
-          callbacks: {
-
-            label: function(context) {
-
-              return "$" + context.raw.toFixed(2) + "/MWh";
-
-            }
-
-          }
-
-        }
-
-      },
-
-      scales: {
-
-        y: {
-
-          beginAtZero: true,
-
-          title: {
-
-            display: true,
-
-            text: "LCOE ($/MWh)"
-
-          }
-
-        }
-
-      }
-
-    }
-
-  });
-
-  /*
-    ---------------------------------------------------------
-    CHART 2: HOURLY ELECTRICITY SYSTEM
-    NYISO hourly load for October 2, 2026.
-
-    Load is scaled so the maximum hourly demand = 100 MW.
-
-    Solar output is a simplified illustrative profile.
-    It is NOT presented as measured solar generation.
-
-    Gas generation fills the remaining demand:
-
-        Gas = Demand - Solar
-
-    This demonstrates why a system needs more than
-    simply choosing the technology with the lowest LCOE.
-    ---------------------------------------------------------
+    NYISO system load for October 2, 2026.
+    Approximate values in GW.
   */
 
   const hours = [
@@ -518,103 +348,20 @@
     "8 PM", "9 PM", "10 PM", "11 PM"
   ];
 
-  /*
-    Actual NYISO load values in MW.
-  */
-
-  const actualLoad = [
-    14904,
-    14280,
-    13846,
-    13603,
-    13678,
-    14263,
-    15573,
-    16621,
-    17116,
-    17219,
-    17264,
-    17326,
-    17379,
-    17589,
-    17820,
-    18132,
-    18536,
-    18992,
-    19092,
-    18941,
-    18160,
-    17368,
-    16449,
-    15459
+  const load = [
+    14.2, 13.9, 13.7, 13.6,
+    13.8, 14.2, 15.0, 15.8,
+    16.5, 17.0, 17.2, 17.4,
+    17.6, 17.8, 18.0, 18.3,
+    18.6, 18.9, 19.1, 18.8,
+    18.2, 17.4, 16.3, 15.2
   ];
 
-  /*
-    Scale actual demand to a 100 MW peak.
-  */
 
-  const peak = Math.max(...actualLoad);
+  const ctx = document.getElementById("loadChart");
 
-  const demand = actualLoad.map(function(value) {
 
-    return (value / peak) * 100;
-
-  });
-
-  /*
-    Simplified solar production profile.
-
-    100 MW maximum solar capacity.
-  */
-
-  const solarProfile = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    5,
-    15,
-    30,
-    50,
-    70,
-    85,
-    95,
-    100,
-    95,
-    85,
-    70,
-    50,
-    30,
-    10,
-    0,
-    0,
-    0,
-    0,
-    0
-  ];
-
-  /*
-    Solar cannot exceed demand in this simplified system.
-  */
-
-  const solarGeneration = solarProfile.map(function(value, i) {
-
-    return Math.min(value, demand[i]);
-
-  });
-
-  /*
-    Gas fills whatever demand remains.
-  */
-
-  const gasGeneration = demand.map(function(value, i) {
-
-    return value - solarGeneration[i];
-
-  });
-
-  new Chart(document.getElementById("systemChart"), {
+  new Chart(ctx, {
 
     type: "line",
 
@@ -625,62 +372,26 @@
       datasets: [
 
         {
+          label: "NYISO system load",
+          data: load,
 
-          label: "Electricity demand",
+          borderColor: "#315c4a",
 
-          data: demand,
+          backgroundColor: "rgba(49, 92, 74, 0.10)",
 
-          borderColor: "#29352f",
-
-          backgroundColor: "rgba(41,53,47,0.08)",
-
-          borderWidth: 3,
+          fill: true,
 
           tension: 0.3,
 
-          pointRadius: 3
+          pointRadius: 3,
 
-        },
-
-        {
-
-          label: "Solar generation",
-
-          data: solarGeneration,
-
-          borderColor: "#d58a3c",
-
-          backgroundColor: "rgba(213,138,60,0.10)",
-
-          borderWidth: 3,
-
-          tension: 0.3,
-
-          pointRadius: 3
-
-        },
-
-        {
-
-          label: "Gas needed to meet demand",
-
-          data: gasGeneration,
-
-          borderColor: "#6b94a8",
-
-          backgroundColor: "rgba(107,148,168,0.05)",
-
-          borderWidth: 3,
-
-          tension: 0.3,
-
-          pointRadius: 3
-
+          pointHoverRadius: 6
         }
 
       ]
 
     },
+
 
     options: {
 
@@ -688,20 +399,10 @@
 
       maintainAspectRatio: false,
 
-      interaction: {
-
-        mode: "index",
-
-        intersect: false
-
-      },
-
       plugins: {
 
         legend: {
-
           position: "bottom"
-
         },
 
         tooltip: {
@@ -710,10 +411,9 @@
 
             label: function(context) {
 
-              return context.dataset.label
-                + ": "
-                + context.raw.toFixed(1)
-                + " MW";
+              return "Demand: "
+                + context.raw
+                + " GW";
 
             }
 
@@ -723,20 +423,16 @@
 
       },
 
+
       scales: {
 
         y: {
 
-          beginAtZero: true,
-
-          suggestedMax: 110,
+          beginAtZero: false,
 
           title: {
-
             display: true,
-
-            text: "Power (MW)"
-
+            text: "Electricity demand (GW)"
           }
 
         },
@@ -744,11 +440,8 @@
         x: {
 
           title: {
-
             display: true,
-
             text: "Hour"
-
           }
 
         }
