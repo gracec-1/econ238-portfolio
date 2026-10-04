@@ -176,9 +176,8 @@
 <h1>LCOE Versus an Electricity System</h1>
 
 <p>
-  A technology may look inexpensive when measured by LCOE,
-  but building a system that meets electricity demand every hour
-  can require something different.
+  Comparing the cost of individual technologies with the cost of
+  actually meeting electricity demand every hour.
 </p>
 ```
 
@@ -192,8 +191,8 @@
 <h2>The question</h2>
 
 <p>
-  What happens when we move from comparing the cost of individual
-  technologies to actually building an electricity system?
+  Does the technology with the lowest Levelized Cost of Electricity
+  also produce the lowest-cost electricity system?
 </p>
 ```
 
@@ -207,61 +206,65 @@
 <h2>First: compare technologies by LCOE</h2>
 
 <p>
-  The U.S. Energy Information Administration estimates that new
-  solar PV has a lower average LCOE than natural gas combined-cycle
-  generation, making solar appear cheaper when technologies are
-  compared on their own.
+  Levelized Cost of Electricity (LCOE) measures the average cost of
+  producing electricity over the lifetime of a power plant. It is useful
+  for comparing technologies, but it does not require electricity demand
+  to be met at every hour.
 </p>
 
 <p>
-  But LCOE does not ask whether a technology can supply electricity
-  whenever consumers need it.
+  EIA estimates that new solar and wind generation can have relatively
+  low LCOE compared with some other technologies. But a power system
+  needs electricity even when the sun is not shining or wind production
+  is low.
 </p>
 ```
 
   </section>
 
-  <!-- HOURLY LOAD -->
+  <!-- HOURLY SYSTEM -->
 
   <section class="section">
 
 ```
-<h2>Now add real electricity demand</h2>
+<h2>Now require demand to be met every hour</h2>
 
 <p>
-  Electricity demand changes throughout the day. The graph below shows
-  an actual 24-hour NYISO system load profile. A power system must
-  generate enough electricity to meet this changing demand in every hour.
+  The chart below uses actual hourly NYISO electricity demand for
+  October 2, 2026. Solar generation is added to the system, and gas
+  generation supplies the remaining electricity needed to meet demand.
 </p>
 
 <div class="chart-container">
-  <canvas id="loadChart"></canvas>
+  <canvas id="systemChart"></canvas>
 </div>
 
 <p class="chart-note">
-  NYISO system load for October 2, 2026. Values are shown in GW.
+  NYISO hourly system load for October 2, 2026. Solar generation is
+  illustrative and gas generation represents the remaining demand.
 </p>
 ```
 
   </section>
 
-  <!-- SYSTEM -->
+  <!-- EXPLANATION -->
 
   <section class="section">
 
 ```
-<h2>What changes when every hour must be met?</h2>
+<h2>What changes?</h2>
 
 <p>
-  Suppose we build a system using solar because it has a low LCOE.
-  Solar can produce large amounts of electricity during daylight,
-  but its output falls to zero at night.
+  Looking only at LCOE can make solar or wind appear inexpensive because
+  their fuel costs are very low. However, electricity demand does not
+  stop when renewable generation falls.
 </p>
 
 <p>
-  The system therefore needs another source of electricity, storage,
-  or additional generation capacity to meet demand when solar output
-  is low.
+  Once demand must be met every hour, the system may need additional
+  generation, storage, or transmission. These resources have costs that
+  are not captured by simply comparing the LCOE of individual power
+  plants.
 </p>
 ```
 
@@ -272,19 +275,19 @@
   <section class="takeaway">
 
 ```
-<h2>The takeaway</h2>
+<h2>What does this show?</h2>
 
 <p>
   <strong>
-    The cheapest technology is not necessarily the cheapest complete system.
+    The cheapest technology is not necessarily the cheapest electricity system.
   </strong>
 </p>
 
 <p>
-  LCOE is useful for comparing individual technologies, but an electricity
-  system must also satisfy demand every hour. Once reliability and timing
-  are included, the cost of the system can look very different from the
-  LCOE of a single technology.
+  LCOE is useful for comparing individual technologies, but building an
+  electricity system requires enough resources to satisfy demand every
+  hour. Once that requirement is added, the cost and mix of technologies
+  can look very different.
 </p>
 ```
 
@@ -299,20 +302,20 @@
 
 <p>
   U.S. Energy Information Administration,
-  <em>Levelized Costs of New Generation Resources</em>.
+  <em>Levelized Costs of New Generation Resources in the Annual Energy Outlook</em>.
 </p>
 
 <p>
   <a
-    href="https://www.eia.gov/outlooks/aeo/electricity_generation/pdf/LCOE_report.pdf"
+    href="https://www.eia.gov/outlooks/aeo/electricity_generation/"
     target="_blank">
-    EIA — Levelized Cost of Electricity Report
+    EIA — Electricity Generation
   </a>
 </p>
 
 <p>
   New York Independent System Operator (NYISO),
-  <em>Day-Ahead Forecast / System Load</em>.
+  hourly system load data.
 </p>
 
 <p>
@@ -335,33 +338,96 @@
 <script>
 
   /*
-    NYISO system load for October 2, 2026.
-    Approximate values in GW.
+    Actual NYISO hourly system load for October 2, 2026.
+    Values are in MW.
   */
 
-  const hours = [
-    "12 AM", "1 AM", "2 AM", "3 AM",
-    "4 AM", "5 AM", "6 AM", "7 AM",
-    "8 AM", "9 AM", "10 AM", "11 AM",
-    "12 PM", "1 PM", "2 PM", "3 PM",
-    "4 PM", "5 PM", "6 PM", "7 PM",
-    "8 PM", "9 PM", "10 PM", "11 PM"
+  const actualLoad = [
+    14904,
+    14280,
+    13846,
+    13603,
+    13678,
+    14263,
+    15573,
+    16621,
+    17116,
+    17219,
+    17264,
+    17326,
+    17379,
+    17589,
+    17820,
+    18132,
+    18536,
+    18992,
+    19092,
+    18941,
+    18160,
+    17368,
+    16449,
+    15459
   ];
 
-  const load = [
-    14.2, 13.9, 13.7, 13.6,
-    13.8, 14.2, 15.0, 15.8,
-    16.5, 17.0, 17.2, 17.4,
-    17.6, 17.8, 18.0, 18.3,
-    18.6, 18.9, 19.1, 18.8,
-    18.2, 17.4, 16.3, 15.2
+
+  const hours = actualLoad.map((_, i) => i);
+
+
+  /*
+    Scale the load to 100 MW so the simple system
+    can be viewed as a small power system.
+  */
+
+  const demand = actualLoad.map(load => load / 100);
+
+
+  /*
+    Illustrative solar generation profile.
+    Solar produces during daylight hours and falls
+    to zero overnight.
+  */
+
+  const solarProfile = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    8,
+    18,
+    30,
+    42,
+    50,
+    55,
+    58,
+    55,
+    50,
+    42,
+    32,
+    20,
+    8,
+    2,
+    0,
+    0,
+    0,
+    0
   ];
 
 
-  const ctx = document.getElementById("loadChart");
+  const solarGeneration = solarProfile;
 
 
-  new Chart(ctx, {
+  /*
+    Gas supplies whatever demand remains after solar.
+  */
+
+  const gasGeneration = demand.map((load, i) => {
+    return Math.max(load - solarGeneration[i], 0);
+  });
+
+
+  new Chart(document.getElementById("systemChart"), {
 
     type: "line",
 
@@ -372,26 +438,32 @@
       datasets: [
 
         {
-          label: "NYISO system load",
-          data: load,
+          label: "Electricity demand",
+          data: demand,
+          borderWidth: 3,
+          tension: 0.25,
+          pointRadius: 3
+        },
 
-          borderColor: "#315c4a",
+        {
+          label: "Solar generation",
+          data: solarGeneration,
+          borderWidth: 3,
+          tension: 0.25,
+          pointRadius: 3
+        },
 
-          backgroundColor: "rgba(49, 92, 74, 0.10)",
-
-          fill: true,
-
-          tension: 0.3,
-
-          pointRadius: 3,
-
-          pointHoverRadius: 6
+        {
+          label: "Gas needed",
+          data: gasGeneration,
+          borderWidth: 3,
+          tension: 0.25,
+          pointRadius: 3
         }
 
       ]
 
     },
-
 
     options: {
 
@@ -399,11 +471,12 @@
 
       maintainAspectRatio: false,
 
-      plugins: {
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
 
-        legend: {
-          position: "bottom"
-        },
+      plugins: {
 
         tooltip: {
 
@@ -411,29 +484,33 @@
 
             label: function(context) {
 
-              return "Demand: "
-                + context.raw
-                + " GW";
+              return context.dataset.label
+                + ": "
+                + context.raw.toFixed(1)
+                + " MW";
 
             }
 
           }
 
+        },
+
+        legend: {
+          position: "bottom"
         }
 
       },
-
 
       scales: {
 
         y: {
 
-          beginAtZero: false,
-
           title: {
             display: true,
-            text: "Electricity demand (GW)"
-          }
+            text: "Power (MW)"
+          },
+
+          beginAtZero: true
 
         },
 
