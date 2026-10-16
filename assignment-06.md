@@ -97,8 +97,11 @@
 
   details{background:rgba(253,253,249,.7); border:1px solid var(--mist-deep); border-radius:8px; padding:14px 18px; font-size:.95rem}
   summary{cursor:pointer; font-family:var(--sans); font-weight:700}
-  details ul{padding-left:1.1em; margin:12px 0 0}
-  details li{margin:0 0 8px; overflow-wrap:anywhere}
+  .sources{background:rgba(253,253,249,.7); border:1px solid var(--mist-deep); border-radius:8px; padding:22px 24px}
+  .sources h2{font-size:1.3rem; margin-bottom:6px}
+  .sources p{margin:0 0 10px; font-family:var(--sans); font-size:.9rem; color:var(--muted)}
+  .sources ul{padding-left:1.1em; margin:0; font-size:.95rem}
+  .sources li{margin:0 0 10px; overflow-wrap:anywhere}
 
   /* footer forest */
   footer{margin-top:70px; position:relative; background:var(--spruce); color:#e8f0ea}
@@ -216,8 +219,9 @@
   </section>
 
   <section>
-    <details>
-      <summary>Sources, so you can check my claims</summary>
+    <div class="sources">
+      <h2>Sources</h2>
+      <p>Check my claims yourself:</p>
       <ul>
         <li>Wiens et al. (2021), "Invader removal triggers competitive release in a threatened avian predator," PNAS: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8346899">pmc.ncbi.nlm.nih.gov/articles/PMC8346899</a> (12.1% vs. 0.2% annual decline)</li>
         <li>U.S. Fish and Wildlife Service, Barred Owl Management Strategy Final EIS FAQs: <a href="https://www.fws.gov/question-answer/barred-owl-management-strategy-final-eis-faqs">fws.gov/question-answer/barred-owl-management-strategy-final-eis-faqs</a> (450,000 maximum, about 15,000 per year, under half of 1% of the North American population per year, 4,500+ removed since 2009)</li>
@@ -227,7 +231,7 @@
         <li>AP/NPR on the 2024 strategy and spotted owl declines: <a href="https://npr.org/2024/07/04/nx-s1-5029298/spotted-owls-plan-kill-half-million-barred-owls">npr.org/2024/07/04/nx-s1-5029298/...</a></li>
         <li>NBC News on the permit requirement: <a href="https://www.nbcnews.com/news/us-news/federal-agency-plans-cull-450000-barred-owls-boost-another-species-rcna160281">nbcnews.com/news/us-news/...rcna160281</a></li>
       </ul>
-    </details>
+    </div>
   </section>
 </div>
 </main>
