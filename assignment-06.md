@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<!-- TO SET UP: find-and-replace YOUR_VOTE_FORM_LINK (appears several times) with your Google Form link. -->
+<!-- All vote buttons link to vote.html (the voting page). No setup needed in this file. -->
 <style>
   :root{
     --mist:#dfe7e1; --mist-deep:#c9d7cd; --spruce:#1d3430; --moss:#4f6b57; --lichen:#9fb3a2;
@@ -156,9 +156,9 @@
       <p class="question" data-limit="75" data-name="THE BALLOT QUESTION">Shall Congress appropriate $30 million per year for ten years so the U.S. Fish and Wildlife Service and tribal and state partners can lethally remove up to 10,000 invasive barred owls annually from northern spotted owl range in Washington, Oregon and California, using non-lead ammunition, with annual public reporting, and ending removal in any region where spotted owl decline has not stabilized after five years?</p>
       <p class="ask">Would you take this deal?</p>
       <ul class="opts">
-        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span>Yes</a></li>
-        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span>No</a></li>
-        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span><span>Yes, if&hellip; <br><span class="hint">You'll get a box to say what would have to change.</span></span></a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdSZrW-600K1mJaRM0l2OlY3VMMQRMSgg5dW_Y6Fwa5fShW1g/viewform?usp=header"><span class="bubble"></span>Yes</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdSZrW-600K1mJaRM0l2OlY3VMMQRMSgg5dW_Y6Fwa5fShW1g/viewform?usp=header"><span class="bubble"></span>No</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdSZrW-600K1mJaRM0l2OlY3VMMQRMSgg5dW_Y6Fwa5fShW1g/viewform?usp=header"><span class="bubble"></span><span>Yes, if&hellip; <br><span class="hint">You'll get a box to say what would have to change.</span></span></a></li>
       </ul>
       <p class="anon">Your vote is anonymous and takes about 30 seconds.</p>
     </div>
@@ -242,11 +242,11 @@
   <div class="wrap">
     <h2>Your turn.</h2>
     <p>Would you take this deal? One tap, no sign-in.</p>
-    <a class="cta" href="YOUR_VOTE_FORM_LINK">Cast your vote</a>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdSZrW-600K1mJaRM0l2OlY3VMMQRMSgg5dW_Y6Fwa5fShW1g/viewform?usp=header">Cast your vote</a>
   </div>
 </footer>
 
-<a class="float" id="float" href="YOUR_VOTE_FORM_LINK">Vote</a>
+<a class="float" id="float" href="https://docs.google.com/forms/d/e/1FAIpQLSdSZrW-600K1mJaRM0l2OlY3VMMQRMSgg5dW_Y6Fwa5fShW1g/viewform?usp=header">Vote</a>
 
 <script>
   // Draw conifer silhouettes (deterministic, so the skyline never changes between visits).
