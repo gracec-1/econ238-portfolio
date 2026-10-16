@@ -1,411 +1,275 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floodwater Prevention Ballot Initiative</title>
-    <style>
-        :root {
-            --navy: #173b57;
-            --blue: #247ba0;
-            --light: #edf6fa;
-            --green: #3b806b;
-            --text: #263746;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoot Barred Owls to Save Spotted Owls? A Public Ballot</title>
+<meta name="description" content="A real environmental deal, put to a public vote: fund the removal of up to 100,000 barred owls to save the northern spotted owl. Read it, then vote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<!-- TO SET UP: find-and-replace YOUR_VOTE_FORM_LINK (appears several times) with your Google Form link. -->
+<style>
+  :root{
+    --mist:#dfe7e1; --mist-deep:#c9d7cd; --spruce:#1d3430; --moss:#4f6b57; --lichen:#9fb3a2;
+    --paper:#fdfdf9; --ink:#1b2622; --muted:#52615a;
+    --yes:#2d6a4f; --yes-tint:#e3f0e8; --no:#a23b2a; --no-tint:#f6e4df;
+    --fine:#efe7c9; --amber:#f0b429;
+    --sans:"Libre Franklin", system-ui, sans-serif;
+    --serif:"Source Serif 4", Georgia, serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:var(--serif); font-size:1.125rem; line-height:1.65;
+    background:
+      radial-gradient(70% 38% at 85% 6%, rgba(255,255,255,.75), transparent 70%),
+      radial-gradient(60% 30% at 8% 30%, rgba(255,255,255,.45), transparent 70%),
+      linear-gradient(180deg,#c5d4ca 0,#dde6df 460px,#e6ece7 100%);
+    background-attachment:fixed;
+  }
+  a{color:var(--spruce)}
+  :focus-visible{outline:3px solid var(--ballot,#2a4ba0); outline-offset:3px; border-radius:4px}
+  .wrap{max-width:720px; margin:0 auto; padding:0 20px}
+  h1,h2,h3{font-family:var(--sans); line-height:1.12; margin:0; color:var(--spruce)}
 
-        * {
-            box-sizing: border-box;
-        }
+  /* hero */
+  .hero{padding:64px 0 28px}
+  .hero h1{font-size:clamp(2.3rem,7vw,3.9rem); font-weight:800; letter-spacing:-.02em; max-width:15ch}
+  .hero p.lede{font-size:1.25rem; max-width:34ch; margin:18px 0 30px; color:var(--muted)}
+  .meter{background:rgba(253,253,249,.72); border:1px solid var(--mist-deep); border-radius:10px; padding:20px 22px; backdrop-filter:blur(3px)}
+  .meter h2{font-size:1rem; font-weight:700; margin-bottom:14px}
+  .bar-row{margin:0 0 14px}
+  .bar-row:last-of-type{margin-bottom:6px}
+  .bar-label{display:flex; justify-content:space-between; gap:12px; font-family:var(--sans); font-size:.9rem; font-weight:500; margin-bottom:5px}
+  .bar-label b{font-weight:800}
+  .track{height:16px; background:rgba(29,52,48,.08); border-radius:8px; overflow:hidden}
+  .fill{height:100%; border-radius:8px; transform-origin:left; animation:grow 1.4s .3s cubic-bezier(.2,.7,.2,1) both}
+  .fill.bad{width:100%; background:var(--no)}
+  .fill.good{width:1.65%; min-width:6px; background:var(--yes); animation-delay:1.1s}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .meter small{display:block; font-family:var(--sans); font-size:.78rem; color:var(--muted); margin-top:8px}
+  .jump{display:inline-block; margin-top:26px; font-family:var(--sans); font-weight:700; background:var(--spruce); color:#fff; padding:13px 22px; border-radius:999px; text-decoration:none}
+  .jump:hover{background:var(--moss)}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background: #f4f7f9;
-        }
+  svg.ridge{display:block; width:100%; height:130px}
 
-        header {
-            background: linear-gradient(135deg, #173b57, #247ba0);
-            color: white;
-            padding: 65px 20px;
-            text-align: center;
-        }
+  /* ballot */
+  .ballot{background:var(--paper); border:2px solid var(--ink); border-radius:6px; margin:10px 0 0; box-shadow:0 18px 40px -22px rgba(29,52,48,.55)}
+  .ballot header{background:var(--spruce); color:#fff; font-family:var(--sans); font-weight:500; font-size:.95rem; padding:10px 20px; border-radius:3px 3px 0 0}
+  .ballot .inner{padding:22px 22px 8px}
+  .prop-title{font-family:var(--sans); font-weight:800; font-size:clamp(1.35rem,4vw,1.8rem); line-height:1.15; margin:0 0 14px; color:var(--ink)}
+  .question{margin:0 0 22px}
+  .ask{font-family:var(--sans); font-weight:800; font-size:1.1rem; border-top:2px solid var(--ink); padding-top:16px; margin:0 0 6px}
+  .opts{list-style:none; margin:0; padding:0}
+  .opts li{border-top:1px solid var(--mist-deep)}
+  .opts a{display:flex; align-items:center; gap:16px; padding:15px 4px; text-decoration:none; color:var(--ink); font-family:var(--sans); font-weight:800; font-size:1.25rem}
+  .opts a span.hint{font-weight:500; font-size:.9rem; color:var(--muted)}
+  .bubble{flex:none; width:44px; height:26px; border:2.5px solid var(--ink); border-radius:50%; background:#fff; transition:background .15s}
+  .opts a:hover .bubble,.opts a:focus-visible .bubble{background:var(--ink)}
+  .opts a:hover{background:rgba(29,52,48,.04)}
+  .anon{font-family:var(--sans); font-size:.85rem; color:var(--muted); padding:10px 4px 18px; margin:0; border-top:1px solid var(--mist-deep)}
 
-        header h1 {
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            margin-bottom: 12px;
-        }
+  /* sections */
+  section{padding:46px 0 0}
+  section h2{font-size:1.7rem; font-weight:800; letter-spacing:-.01em; margin-bottom:16px}
+  .body p{margin:0 0 1em; max-width:68ch}
+  .body p:last-child{margin-bottom:0}
 
-        header p {
-            max-width: 720px;
-            margin: auto;
-            font-size: 1.1rem;
-        }
+  dl.ledger{margin:0; border-top:2px solid var(--ink)}
+  dl.ledger div{display:grid; grid-template-columns:150px 1fr; gap:6px 18px; padding:13px 0; border-bottom:1px solid var(--mist-deep)}
+  dl.ledger dt{font-family:var(--sans); font-weight:800; font-size:.95rem; color:var(--spruce)}
+  dl.ledger dd{margin:0}
+  @media (max-width:560px){dl.ledger div{grid-template-columns:1fr}}
 
-        nav {
-            background: white;
-            padding: 15px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            box-shadow: 0 2px 8px #00000012;
-        }
+  .debate{max-width:1000px; margin:0 auto; padding:46px 20px 0}
+  .pair{display:grid; gap:20px}
+  @media (min-width:860px){.pair{grid-template-columns:1fr 1fr}}
+  .case{border-radius:8px; padding:24px 24px 26px; background:var(--paper); border:1px solid var(--mist-deep); border-top-width:8px}
+  .case.yes{border-top-color:var(--yes)} .case.no{border-top-color:var(--no)}
+  .case h2{font-size:1.45rem; margin-bottom:12px}
+  .case.yes h2{color:var(--yes)} .case.no h2{color:var(--no)}
+  .case .body{font-size:1.05rem}
 
-        nav a {
-            color: var(--navy);
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
+  .fineprint{background:var(--fine); border:1.5px dashed #8a7a3a; border-radius:6px; padding:22px 24px}
+  .fineprint h2{font-size:1.3rem; margin-bottom:10px}
+  .fineprint .body{font-size:1rem}
 
-        nav a:hover {
-            color: var(--blue);
-        }
+  details{background:rgba(253,253,249,.7); border:1px solid var(--mist-deep); border-radius:8px; padding:14px 18px; font-size:.95rem}
+  summary{cursor:pointer; font-family:var(--sans); font-weight:700}
+  details ul{padding-left:1.1em; margin:12px 0 0}
+  details li{margin:0 0 8px; overflow-wrap:anywhere}
 
-        main {
-            max-width: 1000px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
+  /* footer forest */
+  footer{margin-top:70px; position:relative; background:var(--spruce); color:#e8f0ea}
+  footer svg.ridge{position:absolute; left:0; right:0; top:-129px}
+  footer .wrap{padding-top:26px; padding-bottom:64px; position:relative}
+  footer h2{color:#fff; font-size:1.8rem; margin-bottom:8px}
+  footer p{margin:0 0 20px; color:#c8d6cc}
+  .cta{display:inline-block; font-family:var(--sans); font-weight:800; font-size:1.1rem; background:var(--amber); color:#1b1500; padding:14px 28px; border-radius:999px; text-decoration:none}
+  .cta:hover{background:#ffc94d}
+  .eyes{position:absolute; right:8%; top:34px; display:flex; gap:16px}
+  .eyes i{width:22px; height:22px; border-radius:50%; background:var(--amber); box-shadow:inset 0 0 0 6px #1b1500, 0 0 14px rgba(240,180,41,.55); display:block}
+  @media (max-width:560px){.eyes{display:none}}
 
-        section {
-            background: white;
-            padding: 30px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px #00000008;
-        }
+  .float{position:fixed; right:16px; bottom:16px; z-index:5; font-family:var(--sans); font-weight:800; background:var(--amber); color:#1b1500; padding:12px 22px; border-radius:999px; text-decoration:none; box-shadow:0 8px 22px -8px rgba(0,0,0,.45); transition:opacity .2s}
+  .float.hide{opacity:0; pointer-events:none}
 
-        h2 {
-            color: var(--navy);
-            margin-top: 0;
-        }
-
-        h3 {
-            color: var(--blue);
-        }
-
-        .ballot {
-            border-left: 6px solid var(--green);
-            background: var(--light);
-            padding: 25px;
-            border-radius: 8px;
-        }
-
-        .choice {
-            display: block;
-            margin: 12px 0;
-            padding: 13px;
-            background: white;
-            border: 1px solid #c9d8e0;
-            border-radius: 7px;
-            cursor: pointer;
-        }
-
-        .choice input {
-            margin-right: 10px;
-        }
-
-        .columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .panel {
-            padding: 20px;
-            background: var(--light);
-            border-radius: 8px;
-        }
-
-        .button {
-            background: var(--navy);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 12px 22px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background: var(--blue);
-        }
-
-        .note {
-            color: #5b6b78;
-            font-size: 0.9rem;
-        }
-
-        li {
-            margin-bottom: 9px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background: var(--navy);
-            color: white;
-        }
-
-        a {
-            overflow-wrap: anywhere;
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                position: static;
-                line-height: 2.2;
-            }
-
-            section {
-                padding: 22px;
-            }
-        }
-    </style>
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .fill{animation:none}
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>Floodwater Prevention Ballot Initiative</h1>
-    <p>A proposal to help communities reduce flooding, protect homes and businesses, and invest in more resilient infrastructure.</p>
-</header>
+<div class="wrap hero">
+  <h1>Shoot barred owls to save spotted owls?</h1>
+  <p class="lede">A real environmental deal, put to a public vote. Read it, then say yes, no, or yes-if.</p>
 
-<nav>
-    <a href="#problem">The Problem</a>
-    <a href="#proposal">Proposal</a>
-    <a href="#arguments">Arguments</a>
-    <a href="#feasibility">Feasibility</a>
-    <a href="#sources">Sources</a>
-    <a href="#vote">Ballot</a>
-</nav>
+  <div class="meter" role="group" aria-label="Yearly decline of spotted owls with and without barred owl removal">
+    <h2>How fast spotted owls are disappearing</h2>
+    <div class="bar-row">
+      <div class="bar-label"><span>Barred owls left alone</span><b>-12.1% a year</b></div>
+      <div class="track"><div class="fill bad"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span>Barred owls removed</span><b>-0.2% a year</b></div>
+      <div class="track"><div class="fill good"></div></div>
+    </div>
+    <small>Large field experiment, Washington, Oregon and California, 2009-2019 (Wiens et al., PNAS 2021).</small>
+  </div>
+  <a class="jump" href="#ballot">Go to the ballot</a>
+</div>
+
+<svg class="ridge" id="ridge-far" aria-hidden="true" viewBox="0 0 1600 130" preserveAspectRatio="xMidYMax slice"></svg>
 
 <main>
-
-<section id="problem">
-    <h2>1. The Problem: Flooding and Stormwater Runoff</h2>
-
-    <p>Flooding can damage homes, businesses, roads, and public infrastructure. In developed areas, pavement, rooftops, and parking lots prevent rainwater from soaking naturally into the ground. As a result, large amounts of water flow into storm drains and low-lying areas, sometimes overwhelming existing drainage systems.</p>
-
-    <p>The U.S. Environmental Protection Agency explains that green infrastructure can help manage stormwater and reduce localized flooding. Examples include rain gardens, permeable pavement, and systems that temporarily store rainwater.</p>
-
-    <p>Communities need a strategy that combines traditional drainage improvements with natural methods of absorbing and storing water. The goal is not to eliminate every flood, but to reduce preventable damage and make neighborhoods more resilient.</p>
-
-    <p>Source: <a href="https://www.epa.gov/green-infrastructure/mitigate-flooding" target="_blank" rel="noopener">U.S. EPA — Mitigate Flooding</a></p>
-</section>
-
-<section id="proposal">
-    <h2>2. The Proposed Solution</h2>
-
-    <p>The Floodwater Prevention Ballot Initiative would establish a publicly funded flood-prevention program. The program would identify areas with recurring stormwater problems and invest in projects designed to capture, absorb, and temporarily store excess rainwater before it overwhelms streets and drainage systems.</p>
-
-    <h3>What would the initiative fund?</h3>
-
-    <div class="columns">
-        <div class="panel">
-            <h3>Rain Gardens and Bioswales</h3>
-            <p>Install planted areas that collect runoff from roads, sidewalks, and rooftops, allowing water to soak into the soil or drain more slowly.</p>
-        </div>
-
-        <div class="panel">
-            <h3>Permeable Pavement</h3>
-            <p>Use suitable pavement in selected parking lots, walkways, and other locations so rainwater can pass through the surface into underlying storage layers.</p>
-        </div>
-
-        <div class="panel">
-            <h3>Stormwater Storage</h3>
-            <p>Build or improve retention areas, underground storage, and drainage infrastructure where engineering assessments show they would be effective.</p>
-        </div>
-
-        <div class="panel">
-            <h3>Flood-Risk Mapping</h3>
-            <p>Identify repeatedly flooded locations and prioritize projects based on expected risk reduction, cost, and the number of residents and properties protected.</p>
-        </div>
+<div class="wrap" style="padding-top:0">
+  <div class="ballot" id="ballot">
+    <header>Public ballot proposition</header>
+    <div class="inner">
+      <p class="prop-title" data-limit="12" data-name="THE PROPOSITION">Fund Killing Up to 100,000 Barred Owls to Save Spotted Owls</p>
+      <p class="question" data-limit="75" data-name="THE BALLOT QUESTION">Shall Congress appropriate $30 million per year for ten years so the U.S. Fish and Wildlife Service and tribal and state partners can lethally remove up to 10,000 invasive barred owls annually from northern spotted owl range in Washington, Oregon and California, using non-lead ammunition, with annual public reporting, and ending removal in any region where spotted owl decline has not stabilized after five years?</p>
+      <p class="ask">Would you take this deal?</p>
+      <ul class="opts">
+        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span>Yes</a></li>
+        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span>No</a></li>
+        <li><a href="YOUR_VOTE_FORM_LINK"><span class="bubble"></span><span>Yes, if&hellip; <br><span class="hint">You'll get a box to say what would have to change.</span></span></a></li>
+      </ul>
+      <p class="anon">Your vote is anonymous and takes about 30 seconds.</p>
     </div>
+  </div>
 
-    <h3>How would the program work?</h3>
-
-    <ol>
-        <li>Conduct a community-wide assessment of flooding and stormwater problems.</li>
-        <li>Publish a list of proposed projects, estimated costs, and expected benefits.</li>
-        <li>Prioritize locations with repeated flooding, vulnerable infrastructure, and limited capacity to recover from flood damage.</li>
-        <li>Construct projects in phases, starting with those expected to deliver the greatest benefits for their cost.</li>
-        <li>Publish annual reports on spending, project performance, and maintenance.</li>
-    </ol>
-
-    <p>The program would complement existing storm drains, pipes, and other flood-control infrastructure rather than replace them entirely.</p>
-
-    <p>Technical background: <a href="https://www.epa.gov/green-infrastructure/types-green-infrastructure" target="_blank" rel="noopener">U.S. EPA — Types of Green Infrastructure</a></p>
-</section>
-
-<section id="funding">
-    <h2>3. Funding and Accountability</h2>
-
-    <p>The initiative would authorize the community to develop a dedicated flood-prevention budget. The final funding mechanism and amount would be determined through local financial and legal review before the measure is placed on an official ballot.</p>
-
-    <p>Possible funding sources include:</p>
-
-    <ul>
-        <li>A voter-approved bond or other locally authorized public funding mechanism.</li>
-        <li>Eligible state and federal flood-mitigation grants.</li>
-        <li>Existing stormwater-management funds, where legally permitted.</li>
-        <li>Public-private partnerships for projects that provide shared benefits.</li>
-    </ul>
-
-    <p>Public funds would be subject to annual financial reporting, independent audits where required, and public disclosure of project costs. Funding should be allocated according to demonstrated flood risk and expected public benefit.</p>
-
-    <p class="note">This is a proposed policy framework, not an existing government program. Specific taxes, fees, bond amounts, and voting procedures would require jurisdiction-specific review.</p>
-</section>
-
-<section id="arguments">
-    <h2>4. Arguments For and Against</h2>
-
-    <div class="columns">
-        <div class="panel">
-            <h3>Arguments in Favor</h3>
-            <ul>
-                <li><strong>Less flood damage:</strong> Capturing runoff may reduce water accumulation in vulnerable areas.</li>
-                <li><strong>Multiple benefits:</strong> Green infrastructure can also improve water quality and add vegetation to developed areas.</li>
-                <li><strong>Long-term planning:</strong> Preventive investment may reduce some future repair and recovery costs.</li>
-                <li><strong>Better targeting:</strong> Public risk assessments can help direct resources to neighborhoods with the greatest needs.</li>
-                <li><strong>Flexible solutions:</strong> Projects can be adapted to local geography and existing infrastructure.</li>
-            </ul>
-        </div>
-
-        <div class="panel">
-            <h3>Arguments Against</h3>
-            <ul>
-                <li><strong>Upfront costs:</strong> Construction and engineering may require substantial public investment.</li>
-                <li><strong>Ongoing maintenance:</strong> Drainage systems, vegetation, and permeable surfaces require upkeep.</li>
-                <li><strong>Limited effectiveness:</strong> Green infrastructure alone cannot prevent every major flood.</li>
-                <li><strong>Unequal benefits:</strong> Poorly planned projects might protect some areas more than others.</li>
-                <li><strong>Funding concerns:</strong> Taxes, fees, or borrowing could place burdens on residents.</li>
-            </ul>
-        </div>
+  <section id="deal">
+    <h2>What's the deal?</h2>
+    <div data-limit="150" data-name="WHAT'S THE DEAL?">
+    <dl class="ledger">
+      <div><dt>What we buy</dt><dd>Time for a collapsing species. Spotted owls have fallen at least 50% across study sites. In a 2009-2019 experiment, they declined 12.1% per year where barred owls were left alone, but only 0.2% where removed.</dd></div>
+      <div><dt>What we give up</dt><dd>Up to 100,000 barred owls over ten years, under half of 1% of the North American population per year (FWS's measure), plus the principle of not shooting protected birds.</dd></div>
+      <div><dt>Who benefits</dt><dd>Spotted owls, old-forest ecosystems, tribes and agencies paid to do the work, and communities living under logging limits meant to protect the owl.</dd></div>
+      <div><dt>Who bears costs</dt><dd>The owls killed.</dd></div>
+      <div><dt>Who pays</dt><dd>Federal taxpayers, about 9 cents per American per year.</dd></div>
+      <div><dt>Scale</dt><dd>$30 million per year, $300 million total, assuming up to $3,000 per owl (2024 Hoopa Valley grant: $4.5 million for 1,500 owls).</dd></div>
+    </dl>
     </div>
+  </section>
+</div>
 
-    <p>A responsible version of the initiative would address these concerns through phased construction, transparent budgeting, independent engineering reviews, and clear performance measures.</p>
-</section>
+<div class="debate">
+  <div class="pair">
+    <section class="case yes" style="padding-top:24px">
+      <h2>The best case for yes</h2>
+      <div class="body" data-limit="150" data-name="THE BEST CASE FOR YES">
+        <p>We already paid for the first answer to this problem. For thirty years, logging restrictions in the Northwest were supposed to save the spotted owl, and timber towns bore the cost. The owl kept declining anyway, because a larger, more aggressive competitor was evicting it. Habitat protection is necessary, but on its own it has not been enough.</p>
+        <p>Unlike most conservation fights, this one has a controlled experiment. Removing barred owls nearly stopped the decline within a decade. The cost is small: about nine cents per American per year. The program is built to be accountable: no lead ammunition, no public hunting, annual reporting, and an automatic kill-switch where it fails.</p>
+        <p>If we do nothing, federal biologists say spotted owls will likely go extinct across all or most of their range. Extinction is the one outcome we cannot undo.</p>
+      </div>
+    </section>
+    <section class="case no" style="padding-top:24px">
+      <h2>The best case for no</h2>
+      <div class="body" data-limit="150" data-name="THE BEST CASE FOR NO">
+        <p>This kills a protected North American bird to fix a problem humans started. Critics say habitat loss is the root cause and barred owls are only the latest threat; they argue $300 million buys more if spent protecting forest.</p>
+        <p>The program never ends. Barred owls keep arriving from the east, so removal must continue indefinitely or the gains vanish. The experiments covered small sites, and scaling to millions of acres of rugged forest is unproven. More than 75 groups predicted it would fail. No official cost estimate exists; opponents project $1.35 billion for the full 30-year plan.</p>
+        <p>Ethically, we are choosing which owl deserves to live. Barred owls did not choose to come west, yet one owl pays for the other's survival. A bipartisan group of lawmakers has called the plan a waste of taxpayer money.</p>
+      </div>
+    </section>
+  </div>
+</div>
 
-<section id="feasibility">
-    <h2>5. Feasibility Analysis</h2>
-
-    <h3>Technical feasibility</h3>
-    <p>The underlying methods are already used in stormwater management. The EPA documents the use of rain gardens, permeable pavement, retention systems, and related green infrastructure. However, each location would need to be evaluated for soil conditions, drainage capacity, groundwater, and flood type.</p>
-
-    <h3>Economic feasibility</h3>
-    <p>The program could be implemented gradually instead of funding every project at once. Before construction, officials should compare estimated construction and maintenance costs with expected reductions in property damage, infrastructure repairs, and other flood-related losses. Grant funding could reduce the local financial burden when projects qualify.</p>
-
-    <h3>Political feasibility</h3>
-    <p>Residents may support reducing flood damage but disagree about how the program should be funded. Publishing cost estimates, explaining who benefits, and reporting measurable results could help voters evaluate the trade-offs.</p>
-
-    <h3>Environmental feasibility</h3>
-    <p>Vegetated stormwater systems can help filter pollutants and provide additional environmental benefits. However, designs must be appropriate for the site, and contaminated land or unsuitable soil may limit infiltration. The program should also preserve existing wetlands and avoid transferring flood risks to other neighborhoods.</p>
-
-    <h3>How would success be measured?</h3>
-    <ul>
-        <li>Changes in runoff volume at completed project sites.</li>
-        <li>Frequency and severity of flooding at targeted locations.</li>
-        <li>Number of homes, businesses, roads, and public facilities benefiting.</li>
-        <li>Construction and maintenance costs compared with original estimates.</li>
-        <li>Distribution of investments across neighborhoods with different levels of flood risk.</li>
-    </ul>
-
-    <p><strong>Overall assessment:</strong> The initiative is technically plausible because it builds on established stormwater-management methods. Its overall feasibility depends on local flood conditions, available land, engineering studies, funding, and long-term maintenance. It should be presented as a way to reduce flood risk, not eliminate flooding entirely.</p>
-
-    <p>Additional resource: <a href="https://www.epa.gov/water-research/storm-water-management-model-swmm" target="_blank" rel="noopener">U.S. EPA — Storm Water Management Model</a></p>
-</section>
-
-<section id="sources">
-    <h2>6. Sources and Further Reading</h2>
-
-    <ol>
-        <li>
-            <a href="https://www.epa.gov/green-infrastructure/mitigate-flooding" target="_blank" rel="noopener">U.S. Environmental Protection Agency — Mitigate Flooding</a>
-            <p>Explains how green infrastructure and floodplain management can help reduce flood risk.</p>
-        </li>
-
-        <li>
-            <a href="https://www.epa.gov/green-infrastructure/types-green-infrastructure" target="_blank" rel="noopener">U.S. Environmental Protection Agency — Types of Green Infrastructure</a>
-            <p>Describes rain gardens, permeable pavement, green roofs, and other stormwater-management methods.</p>
-        </li>
-
-        <li>
-            <a href="https://www.epa.gov/water-research/storm-water-management-model-swmm" target="_blank" rel="noopener">U.S. Environmental Protection Agency — Storm Water Management Model</a>
-            <p>Provides information about modeling runoff and evaluating green infrastructure practices.</p>
-        </li>
-
-        <li>
-            <a href="https://www.fema.gov/sites/default/files/documents/fema_resilience_nature-based-solutions-fact-sheet.pdf" target="_blank" rel="noopener">Federal Emergency Management Agency — Nature-Based Solutions Fact Sheet</a>
-            <p>Discusses nature-based solutions and federal hazard-mitigation funding programs.</p>
-        </li>
-    </ol>
-
-    <p class="note">These sources support the technical background of the proposal. The specific ballot measure, funding plan, and projected local results are proposed ideas and would need additional local research.</p>
-</section>
-
-<section id="vote">
-    <h2>7. Sample Ballot</h2>
-
-    <div class="ballot">
-        <h3>Floodwater Prevention Initiative</h3>
-
-        <p><strong>Ballot question:</strong></p>
-
-        <p>Should the community establish a publicly accountable flood-prevention program to identify high-risk areas and invest in stormwater infrastructure, rain gardens, permeable pavement, and other measures intended to reduce flood damage, subject to available funding, engineering review, and public reporting?</p>
-
-        <form id="ballotForm">
-            <label class="choice">
-                <input type="radio" name="vote" value="yes" required>
-                <strong>YES</strong> — Support establishing the program.
-            </label>
-
-            <label class="choice">
-                <input type="radio" name="vote" value="no">
-                <strong>NO</strong> — Oppose establishing the program.
-            </label>
-
-            <button class="button" type="submit">Submit Sample Vote</button>
-        </form>
-
-        <p id="voteResult" aria-live="polite"></p>
-
-        <p class="note">This is a demonstration ballot for an educational proposal. It is not an official election, and votes are not saved or transmitted.</p>
+<div class="wrap">
+  <section>
+    <div class="fineprint">
+      <h2>Where is the body buried?</h2>
+      <div class="body" data-limit="100" data-name="WHERE IS THE BODY BURIED?">
+        <p>Removal stabilizes spotted owls; it does not rebuild them. Even with removal they still declined 0.2% per year, and no one has shown recovery to a safe population. The experiments ran on limited sites, and barred owls recolonize, so "ten years" probably becomes forever. Cost per owl is uncertain: roughly $800 in FWS's 2013 experiment budget, $3,000 in a 2024 grant. And a kill-switch only works if agencies honestly report failure.</p>
+      </div>
     </div>
-</section>
+  </section>
 
+  <section>
+    <h2>Why isn't this already happening?</h2>
+    <div class="body" data-limit="150" data-name="WHY ISN'T THIS ALREADY HAPPENING?">
+      <p>Partly, it is. In 2024 FWS approved a strategy allowing removal of up to 450,000 owls over 30 years, and more than 4,500 have been removed since 2009. But it came with no official cost estimate, and in 2025 the administration canceled three grants supporting removal.</p>
+      <p>Why? Concentrated, motivated opposition: a coalition of 240+ organizations, including animal-welfare groups and Audubon chapters, with a simple, emotional message ("shooting owls"), against diffuse support from conservationists who are themselves split. The beneficiary can't vote or donate, and the benefits are slow, hard to see and have no market price, while shotguns and a per-bird price tag are immediate and easy to attack. Politicians in both parties find "wasteful" easy to say. And FWS must effectively permit itself to kill a bird protected by treaty, inviting legal challenge and delay.</p>
+    </div>
+  </section>
+
+  <section>
+    <details>
+      <summary>Sources, so you can check my claims</summary>
+      <ul>
+        <li>Wiens et al. (2021), "Invader removal triggers competitive release in a threatened avian predator," PNAS: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8346899">pmc.ncbi.nlm.nih.gov/articles/PMC8346899</a> (12.1% vs. 0.2% annual decline)</li>
+        <li>U.S. Fish and Wildlife Service, Barred Owl Management Strategy Final EIS FAQs: <a href="https://www.fws.gov/question-answer/barred-owl-management-strategy-final-eis-faqs">fws.gov/question-answer/barred-owl-management-strategy-final-eis-faqs</a> (450,000 maximum, about 15,000 per year, under half of 1% of the North American population per year, 4,500+ removed since 2009)</li>
+        <li>FWS 2013 experiment EIS executive summary: <a href="https://fws.gov/sites/default/files/documents/BarredOwl-EIS-ExecSum.pdf">fws.gov/sites/default/files/documents/BarredOwl-EIS-ExecSum.pdf</a> ($2.91 million preferred alternative, 3,603 owls)</li>
+        <li>Washington State Standard, July 2025, on the canceled grants, the Hoopa Valley grant and the $1.35 billion estimate: <a href="https://washingtonstatestandard.com/2025/07/22/plans-to-shoot-thousands-of-barred-owls-in-doubt-after-feds-cancel-grants/">washingtonstatestandard.com/2025/07/22/...</a></li>
+        <li>Whidbey News-Times on the cost dispute and the 240-organization opposition coalition: <a href="https://www.whidbeynewstimes.com/?p=122771">whidbeynewstimes.com/?p=122771</a></li>
+        <li>AP/NPR on the 2024 strategy and spotted owl declines: <a href="https://npr.org/2024/07/04/nx-s1-5029298/spotted-owls-plan-kill-half-million-barred-owls">npr.org/2024/07/04/nx-s1-5029298/...</a></li>
+        <li>NBC News on the permit requirement: <a href="https://www.nbcnews.com/news/us-news/federal-agency-plans-cull-450000-barred-owls-boost-another-species-rcna160281">nbcnews.com/news/us-news/...rcna160281</a></li>
+      </ul>
+    </details>
+  </section>
+</div>
 </main>
 
 <footer>
-    <p>Floodwater Prevention Ballot Initiative</p>
-    <p>Building safer, more resilient communities through responsible flood-risk management.</p>
-    <p class="note">Educational proposal — not an official government ballot measure.</p>
+  <svg class="ridge" id="ridge-near" aria-hidden="true" viewBox="0 0 1600 130" preserveAspectRatio="xMidYMax slice"></svg>
+  <div class="eyes" aria-hidden="true"><i></i><i></i></div>
+  <div class="wrap">
+    <h2>Your turn.</h2>
+    <p>Would you take this deal? One tap, no sign-in.</p>
+    <a class="cta" href="YOUR_VOTE_FORM_LINK">Cast your vote</a>
+  </div>
 </footer>
 
+<a class="float" id="float" href="YOUR_VOTE_FORM_LINK">Vote</a>
+
 <script>
-    document.getElementById("ballotForm").addEventListener("submit", function(event) {
-        event.preventDefault();
+  // Draw conifer silhouettes (deterministic, so the skyline never changes between visits).
+  function ridge(svgId, color, seed, minH, maxH, step){
+    var svg = document.getElementById(svgId), W = 1600, H = 130, x = -20, d = "M-20," + H;
+    function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    while (x < W + 40){
+      var h = minH + rnd() * (maxH - minH), w = h * (0.28 + rnd() * 0.12);
+      d += " L" + (x - w).toFixed(1) + "," + H + " L" + x.toFixed(1) + "," + (H - h).toFixed(1) + " L" + (x + w).toFixed(1) + "," + H;
+      x += step * (0.6 + rnd() * 0.8);
+    }
+    d += " L" + (W + 40) + "," + H + " Z";
+    svg.innerHTML = '<path d="' + d + '" fill="' + color + '"/>';
+  }
+  ridge("ridge-far", "#aebfb2", 7, 30, 80, 22);
+  ridge("ridge-near", "#1d3430", 11, 45, 120, 26);
 
-        const selected = document.querySelector('input[name="vote"]:checked');
-
-        if (!selected) {
-            document.getElementById("voteResult").textContent =
-                "Please select YES or NO.";
-            return;
-        }
-
-        const message = selected.value === "yes"
-            ? "You selected YES in this sample ballot."
-            : "You selected NO in this sample ballot.";
-
-        document.getElementById("voteResult").textContent =
-            message + " Your selection has not been saved or transmitted.";
+  // Hide the floating vote button while the ballot or footer is on screen.
+  var fl = document.getElementById("float"), visible = new Set();
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? visible.add(e.target) : visible.delete(e.target); });
+      fl.classList.toggle("hide", visible.size > 0);
     });
+    io.observe(document.getElementById("ballot"));
+    io.observe(document.querySelector("footer"));
+  }
 </script>
-
 </body>
 </html>
