@@ -10,7 +10,7 @@ Environmental Economics, Fall 2026, University of Rochester
 - [Assignment 6: - ](assignment-06.md)
 - [Assignment 7: Owl Deal Ballot](assignment-07.md)
 - [Assignment 8: Substack ](assignment-08.md)
-- [Assignment 9: ](assignment-09.md)
+- [Assignment 9: Who Pays, Who Owns? ](assignment-09.html)
 - [Assignment 10: ](assignment-10.md)
 - [Assignment 11: ](assignment-11.md)
 - [Assignment 12: ](assignment-12.md)
