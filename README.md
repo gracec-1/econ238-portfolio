@@ -12,7 +12,7 @@ Environmental Economics, Fall 2026, University of Rochester
 - [Assignment 8: Substack ](assignment-08.md)
 - [Assignment 9: Who Pays, Who Owns? ](assignment-09.html)
 - [Assignment 10:- ](assignment-10.md)
-- [Assignment 11: ](A11%20%28Econ%20238%29.pdf)
+- [Assignment 11:Ocean Estates: Floating Forests](A11%20%28Econ%20238%29.pdf)
 - [Assignment 12: ](assignment-12.md)
 - [Assignment 13:- ](assignment-13.md)
 - [Assignment 14: ](assignment-14.md)
